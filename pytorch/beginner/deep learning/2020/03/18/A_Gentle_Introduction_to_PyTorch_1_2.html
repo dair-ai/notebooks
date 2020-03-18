@@ -1,48 +1,188 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.0.0">Jekyll</generator><link href="https://dair-ai.github.io/notebooks/feed.xml" rel="self" type="application/atom+xml" /><link href="https://dair-ai.github.io/notebooks/" rel="alternate" type="text/html" /><updated>2020-03-18T13:04:12-05:00</updated><id>https://dair-ai.github.io/notebooks/feed.xml</id><title type="html">Notebooks by dair.ai</title><subtitle>Sharing data science notebooks made easy.</subtitle><entry><title type="html">A Gentle Introduction to PyTorch 1.2</title><link href="https://dair-ai.github.io/notebooks/pytorch/beginner/deep%20learning/2020/03/18/A_Gentle_Introduction_to_PyTorch_1_2.html" rel="alternate" type="text/html" title="A Gentle Introduction to PyTorch 1.2" /><published>2020-03-18T00:00:00-05:00</published><updated>2020-03-18T00:00:00-05:00</updated><id>https://dair-ai.github.io/notebooks/pytorch/beginner/deep%20learning/2020/03/18/A_Gentle_Introduction_to_PyTorch_1_2</id><content type="html" xml:base="https://dair-ai.github.io/notebooks/pytorch/beginner/deep%20learning/2020/03/18/A_Gentle_Introduction_to_PyTorch_1_2.html">&lt;!--
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>A Gentle Introduction to PyTorch 1.2 | Notebooks by dair.ai</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="A Gentle Introduction to PyTorch 1.2" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This comprehensive tutorial aims to introduce the fundamentals of PyTorch building blocks for training neural networks." />
+<meta property="og:description" content="This comprehensive tutorial aims to introduce the fundamentals of PyTorch building blocks for training neural networks." />
+<link rel="canonical" href="https://dair-ai.github.io/notebooks/pytorch/beginner/deep%20learning/2020/03/18/A_Gentle_Introduction_to_PyTorch_1_2.html" />
+<meta property="og:url" content="https://dair-ai.github.io/notebooks/pytorch/beginner/deep%20learning/2020/03/18/A_Gentle_Introduction_to_PyTorch_1_2.html" />
+<meta property="og:site_name" content="Notebooks by dair.ai" />
+<meta property="og:image" content="https://dair-ai.github.io/notebooks" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-18T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"This comprehensive tutorial aims to introduce the fundamentals of PyTorch building blocks for training neural networks.","headline":"A Gentle Introduction to PyTorch 1.2","dateModified":"2020-03-18T00:00:00-05:00","datePublished":"2020-03-18T00:00:00-05:00","@type":"BlogPosting","image":"https://dair-ai.github.io/notebooks","mainEntityOfPage":{"@type":"WebPage","@id":"https://dair-ai.github.io/notebooks/pytorch/beginner/deep%20learning/2020/03/18/A_Gentle_Introduction_to_PyTorch_1_2.html"},"url":"https://dair-ai.github.io/notebooks/pytorch/beginner/deep%20learning/2020/03/18/A_Gentle_Introduction_to_PyTorch_1_2.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/notebooks/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://dair-ai.github.io/notebooks/feed.xml" title="Notebooks by dair.ai" /><link rel="shortcut icon" type="image/x-icon" href="/notebooks/images/favicon.png">
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>A Gentle Introduction to PyTorch 1.2 | Notebooks by dair.ai</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="A Gentle Introduction to PyTorch 1.2" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This comprehensive tutorial aims to introduce the fundamentals of PyTorch building blocks for training neural networks." />
+<meta property="og:description" content="This comprehensive tutorial aims to introduce the fundamentals of PyTorch building blocks for training neural networks." />
+<link rel="canonical" href="https://dair-ai.github.io/notebooks/pytorch/beginner/deep%20learning/2020/03/18/A_Gentle_Introduction_to_PyTorch_1_2.html" />
+<meta property="og:url" content="https://dair-ai.github.io/notebooks/pytorch/beginner/deep%20learning/2020/03/18/A_Gentle_Introduction_to_PyTorch_1_2.html" />
+<meta property="og:site_name" content="Notebooks by dair.ai" />
+<meta property="og:image" content="https://dair-ai.github.io/notebooks" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-18T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"This comprehensive tutorial aims to introduce the fundamentals of PyTorch building blocks for training neural networks.","headline":"A Gentle Introduction to PyTorch 1.2","dateModified":"2020-03-18T00:00:00-05:00","datePublished":"2020-03-18T00:00:00-05:00","@type":"BlogPosting","image":"https://dair-ai.github.io/notebooks","mainEntityOfPage":{"@type":"WebPage","@id":"https://dair-ai.github.io/notebooks/pytorch/beginner/deep%20learning/2020/03/18/A_Gentle_Introduction_to_PyTorch_1_2.html"},"url":"https://dair-ai.github.io/notebooks/pytorch/beginner/deep%20learning/2020/03/18/A_Gentle_Introduction_to_PyTorch_1_2.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://dair-ai.github.io/notebooks/feed.xml" title="Notebooks by dair.ai" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/notebooks/">Notebooks by dair.ai</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/notebooks/about/">About Me</a><a class="page-link" href="/notebooks/search/">Search</a><a class="page-link" href="/notebooks/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">A Gentle Introduction to PyTorch 1.2</h1><p class="page-description">This comprehensive tutorial aims to introduce the fundamentals of PyTorch building blocks for training neural networks.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-18T00:00:00-05:00" itemprop="datePublished">
+        Mar 18, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      14 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/notebooks/categories/#pytorch">pytorch</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/notebooks/categories/#beginner">beginner</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/notebooks/categories/#deep learning">deep learning</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/dair-ai/notebooks/tree/master/_notebooks/2020-03-18-A_Gentle_Introduction_to_PyTorch_1_2.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/notebooks/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/dair-ai/notebooks/master?filepath=_notebooks%2F2020-03-18-A_Gentle_Introduction_to_PyTorch_1_2.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/notebooks/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/dair-ai/notebooks/blob/master/_notebooks/2020-03-18-A_Gentle_Introduction_to_PyTorch_1_2.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/notebooks/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
 # file to edit: _notebooks/2020-03-18-A_Gentle_Introduction_to_PyTorch_1_2.ipynb
---&gt;
+-->
 
-&lt;div class=&quot;container&quot; id=&quot;notebook-container&quot;&gt;
+<div class="container" id="notebook-container">
         
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Getting-Started&quot;&gt;Getting Started&lt;a class=&quot;anchor-link&quot; href=&quot;#Getting-Started&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Before you get started with coding, you need to install the latest version of PyTorch. We are using Google Colab for coding our notebook, so we will use the following command to install PyTorch.&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Getting-Started">Getting Started<a class="anchor-link" href="#Getting-Started"> </a></h2><p>Before you get started with coding, you need to install the latest version of PyTorch. We are using Google Colab for coding our notebook, so we will use the following command to install PyTorch.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## install torch&lt;/span&gt;
-&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;pip3 install &lt;span class=&quot;nv&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;1&lt;/span&gt;.2.0+cu92 &lt;span class=&quot;nv&quot;&gt;torchvision&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;==&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;.4.0+cu92 -f https://download.pytorch.org/whl/torch_stable.html
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## install torch</span>
+<span class="o">!</span>pip3 install <span class="nv">torch</span><span class="o">==</span><span class="m">1</span>.2.0+cu92 <span class="nv">torchvision</span><span class="o">==</span><span class="m">0</span>.4.0+cu92 -f https://download.pytorch.org/whl/torch_stable.html
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Looking in links: https://download.pytorch.org/whl/torch_stable.html
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Looking in links: https://download.pytorch.org/whl/torch_stable.html
 Collecting torch==1.2.0+cu92
   Downloading https://download.pytorch.org/whl/cu92/torch-1.2.0%2Bcu92-cp36-cp36m-manylinux1_x86_64.whl (663.1MB)
      |████████████████████████████████| 663.1MB 39kB/s 
@@ -50,9 +190,9 @@ Collecting torchvision==0.4.0+cu92
   Downloading https://download.pytorch.org/whl/cu92/torchvision-0.4.0%2Bcu92-cp36-cp36m-manylinux1_x86_64.whl (8.8MB)
      |████████████████████████████████| 8.8MB 26.2MB/s 
 Requirement already satisfied: numpy in /usr/local/lib/python3.6/dist-packages (from torch==1.2.0+cu92) (1.16.4)
-Requirement already satisfied: pillow&amp;gt;=4.1.1 in /usr/local/lib/python3.6/dist-packages (from torchvision==0.4.0+cu92) (4.3.0)
+Requirement already satisfied: pillow&gt;=4.1.1 in /usr/local/lib/python3.6/dist-packages (from torchvision==0.4.0+cu92) (4.3.0)
 Requirement already satisfied: six in /usr/local/lib/python3.6/dist-packages (from torchvision==0.4.0+cu92) (1.12.0)
-Requirement already satisfied: olefile in /usr/local/lib/python3.6/dist-packages (from pillow&amp;gt;=4.1.1-&amp;gt;torchvision==0.4.0+cu92) (0.46)
+Requirement already satisfied: olefile in /usr/local/lib/python3.6/dist-packages (from pillow&gt;=4.1.1-&gt;torchvision==0.4.0+cu92) (0.46)
 Installing collected packages: torch, torchvision
   Found existing installation: torch 1.1.0
     Uninstalling torch-1.1.0:
@@ -61,278 +201,278 @@ Installing collected packages: torch, torchvision
     Uninstalling torchvision-0.3.0:
       Successfully uninstalled torchvision-0.3.0
 Successfully installed torch-1.2.0+cu92 torchvision-0.4.0+cu92
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;Now we need to import a few modules which will be useful to obtain the necessary functions that will help us to build our deep learning model. The main ones are &lt;code&gt;torch&lt;/code&gt; and &lt;code&gt;torchvision&lt;/code&gt;. They contain the majority of the functions that you need to get started with PyTorch. However, as this is a deep learning tutorial we will need &lt;code&gt;torch.nn&lt;/code&gt;, &lt;code&gt;torch.nn.functional&lt;/code&gt; and &lt;code&gt;torchvision.transforms&lt;/code&gt; which all contain utility functions to build our model. We probably won't use all the modules listed below but they are the typical modules you will be importing when starting your deep learning projects.&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now we need to import a few modules which will be useful to obtain the necessary functions that will help us to build our deep learning model. The main ones are <code>torch</code> and <code>torchvision</code>. They contain the majority of the functions that you need to get started with PyTorch. However, as this is a deep learning tutorial we will need <code>torch.nn</code>, <code>torch.nn.functional</code> and <code>torchvision.transforms</code> which all contain utility functions to build our model. We probably won't use all the modules listed below but they are the typical modules you will be importing when starting your deep learning projects.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## The usual imports&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch.nn&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;nn&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torch.nn.functional&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;F&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torchvision&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;torchvision.transforms&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;transforms&lt;/span&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## The usual imports</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+<span class="kn">import</span> <span class="nn">torch.nn.functional</span> <span class="k">as</span> <span class="nn">F</span>
+<span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">import</span> <span class="nn">torchvision.transforms</span> <span class="k">as</span> <span class="nn">transforms</span>
 
-&lt;span class=&quot;c1&quot;&gt;## for printing image&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;plt&lt;/span&gt;
-&lt;span class=&quot;kn&quot;&gt;import&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;numpy&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;as&lt;/span&gt; &lt;span class=&quot;nn&quot;&gt;np&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<span class="c1">## for printing image</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;Below we check for the PyTorch version just to make sure that you are using the proper version. At the time of this tutorial, we are working with PyTorch 1.2.&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below we check for the PyTorch version just to make sure that you are using the proper version. At the time of this tutorial, we are working with PyTorch 1.2.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## print out the pytorch version used&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;__version__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## print out the pytorch version used</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;1.2.0+cu92
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1.2.0+cu92
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Loading-the-Data&quot;&gt;Loading the Data&lt;a class=&quot;anchor-link&quot; href=&quot;#Loading-the-Data&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Let's get right into it! As with any machine learning project, you need to load your dataset. We are using the &lt;a href=&quot;http://yann.lecun.com/exdb/mnist/&quot;&gt;MNIST dataset&lt;/a&gt;, which is the Hello World of datasets in the machine learning world.&lt;/p&gt;
-&lt;p&gt;The data consists of number images that are of size &lt;code&gt;28 X 28&lt;/code&gt;. We will discuss the images shortly, but our plan is to load data into batches of size &lt;code&gt;32&lt;/code&gt;, similar to the figure below.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=19AC_WpscyXkrK_o4PaFFGpt_jG0aJm_f&quot; alt=&quot;alt text&quot; /&gt;&lt;/p&gt;
-&lt;p&gt;Here are the complete steps we are performing when importing our data:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;We will import and tranform the data into tensors using the &lt;code&gt;transforms&lt;/code&gt; module&lt;/li&gt;
-&lt;li&gt;We will use &lt;code&gt;DataLoader&lt;/code&gt; to build convenient data loaders, which makes it easy to efficiently feed data in batches to deep learning models. We will get to the topic of batches in a bit but for now just think of them as subsets of your data. &lt;/li&gt;
-&lt;li&gt;As hinted above, we will also create batches of the data by setting the &lt;code&gt;batch&lt;/code&gt; parameter inside the data loader. Notice we use batches of &lt;code&gt;32&lt;/code&gt; in this tutorial but you can change it to &lt;code&gt;64&lt;/code&gt; if you like. &lt;/li&gt;
-&lt;/ul&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Loading-the-Data">Loading the Data<a class="anchor-link" href="#Loading-the-Data"> </a></h2><p>Let's get right into it! As with any machine learning project, you need to load your dataset. We are using the <a href="http://yann.lecun.com/exdb/mnist/">MNIST dataset</a>, which is the Hello World of datasets in the machine learning world.</p>
+<p>The data consists of number images that are of size <code>28 X 28</code>. We will discuss the images shortly, but our plan is to load data into batches of size <code>32</code>, similar to the figure below.</p>
+<p><img src="https://drive.google.com/uc?export=view&amp;id=19AC_WpscyXkrK_o4PaFFGpt_jG0aJm_f" alt="alt text" /></p>
+<p>Here are the complete steps we are performing when importing our data:</p>
+<ul>
+<li>We will import and tranform the data into tensors using the <code>transforms</code> module</li>
+<li>We will use <code>DataLoader</code> to build convenient data loaders, which makes it easy to efficiently feed data in batches to deep learning models. We will get to the topic of batches in a bit but for now just think of them as subsets of your data. </li>
+<li>As hinted above, we will also create batches of the data by setting the <code>batch</code> parameter inside the data loader. Notice we use batches of <code>32</code> in this tutorial but you can change it to <code>64</code> if you like. </li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## parameter denoting the batch size&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;BATCH_SIZE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;32&lt;/span&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## parameter denoting the batch size</span>
+<span class="n">BATCH_SIZE</span> <span class="o">=</span> <span class="mi">32</span>
 
-&lt;span class=&quot;c1&quot;&gt;## transformations&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transforms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Compose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transforms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ToTensor&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()])&lt;/span&gt;
+<span class="c1">## transformations</span>
+<span class="n">transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">transforms</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">()])</span>
 
-&lt;span class=&quot;c1&quot;&gt;## download and load training dataset&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;trainset&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torchvision&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datasets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MNIST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;./data&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                        &lt;span class=&quot;n&quot;&gt;download&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;trainloader&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataLoader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trainset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BATCH_SIZE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                          &lt;span class=&quot;n&quot;&gt;shuffle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_workers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+<span class="c1">## download and load training dataset</span>
+<span class="n">trainset</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                        <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+<span class="n">trainloader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">trainset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
+                                          <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 
-&lt;span class=&quot;c1&quot;&gt;## download and load testing dataset&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;testset&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torchvision&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;datasets&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MNIST&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;./data&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                       &lt;span class=&quot;n&quot;&gt;download&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;True&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;testloader&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;DataLoader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;testset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;BATCH_SIZE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
-                                         &lt;span class=&quot;n&quot;&gt;shuffle&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;False&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num_workers&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<span class="c1">## download and load testing dataset</span>
+<span class="n">testset</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">MNIST</span><span class="p">(</span><span class="n">root</span><span class="o">=</span><span class="s1">&#39;./data&#39;</span><span class="p">,</span> <span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                       <span class="n">download</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">transform</span><span class="p">)</span>
+<span class="n">testloader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span><span class="n">testset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="n">BATCH_SIZE</span><span class="p">,</span>
+                                         <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stderr output_text&quot;&gt;
-&lt;pre&gt;0it [00:00, ?it/s]&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>0it [00:00, ?it/s]</pre>
+</div>
+</div>
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz to ./data/MNIST/raw/train-images-idx3-ubyte.gz
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Downloading http://yann.lecun.com/exdb/mnist/train-images-idx3-ubyte.gz to ./data/MNIST/raw/train-images-idx3-ubyte.gz
+</pre>
+</div>
+</div>
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stderr output_text&quot;&gt;
-&lt;pre&gt;9920512it [00:01, 7888836.26it/s]                             
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>9920512it [00:01, 7888836.26it/s]                             
+</pre>
+</div>
+</div>
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Extracting ./data/MNIST/raw/train-images-idx3-ubyte.gz to ./data/MNIST/raw
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Extracting ./data/MNIST/raw/train-images-idx3-ubyte.gz to ./data/MNIST/raw
+</pre>
+</div>
+</div>
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stderr output_text&quot;&gt;
-&lt;pre&gt;  0%|          | 0/28881 [00:00&amp;lt;?, ?it/s]&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>  0%|          | 0/28881 [00:00&lt;?, ?it/s]</pre>
+</div>
+</div>
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz to ./data/MNIST/raw/train-labels-idx1-ubyte.gz
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Downloading http://yann.lecun.com/exdb/mnist/train-labels-idx1-ubyte.gz to ./data/MNIST/raw/train-labels-idx1-ubyte.gz
+</pre>
+</div>
+</div>
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stderr output_text&quot;&gt;
-&lt;pre&gt;32768it [00:00, 125242.35it/s]           
-  0%|          | 0/1648877 [00:00&amp;lt;?, ?it/s]&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>32768it [00:00, 125242.35it/s]           
+  0%|          | 0/1648877 [00:00&lt;?, ?it/s]</pre>
+</div>
+</div>
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Extracting ./data/MNIST/raw/train-labels-idx1-ubyte.gz to ./data/MNIST/raw
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Extracting ./data/MNIST/raw/train-labels-idx1-ubyte.gz to ./data/MNIST/raw
 Downloading http://yann.lecun.com/exdb/mnist/t10k-images-idx3-ubyte.gz to ./data/MNIST/raw/t10k-images-idx3-ubyte.gz
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</pre>
+</div>
+</div>
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stderr output_text&quot;&gt;
-&lt;pre&gt;1654784it [00:00, 2128406.36it/s]                           
-0it [00:00, ?it/s]&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>1654784it [00:00, 2128406.36it/s]                           
+0it [00:00, ?it/s]</pre>
+</div>
+</div>
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Extracting ./data/MNIST/raw/t10k-images-idx3-ubyte.gz to ./data/MNIST/raw
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Extracting ./data/MNIST/raw/t10k-images-idx3-ubyte.gz to ./data/MNIST/raw
 Downloading http://yann.lecun.com/exdb/mnist/t10k-labels-idx1-ubyte.gz to ./data/MNIST/raw/t10k-labels-idx1-ubyte.gz
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</pre>
+</div>
+</div>
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stderr output_text&quot;&gt;
-&lt;pre&gt;8192it [00:00, 48073.80it/s]            &lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>8192it [00:00, 48073.80it/s]            </pre>
+</div>
+</div>
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Extracting ./data/MNIST/raw/t10k-labels-idx1-ubyte.gz to ./data/MNIST/raw
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Extracting ./data/MNIST/raw/t10k-labels-idx1-ubyte.gz to ./data/MNIST/raw
 Processing...
 Done!
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</pre>
+</div>
+</div>
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stderr output_text&quot;&gt;
-&lt;pre&gt;
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;Let's inspect what the trainset and testset objects contain.&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Let's inspect what the trainset and testset objects contain.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## print the trainset and testset&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trainset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;testset&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## print the trainset and testset</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">trainset</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">testset</span><span class="p">)</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Dataset MNIST
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Dataset MNIST
     Number of datapoints: 60000
     Root location: ./data
     Split: Train
@@ -348,93 +488,93 @@ Dataset MNIST
 Transform: Compose(
                ToTensor()
            )
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;This is a beginner's tutorial so I will break down things a bit here:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;BATCH_SIZE&lt;/code&gt; is a parameter that denotes the batch size we will use for our model&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;transform&lt;/code&gt; holds code for whatever transformations you will apply to your data. I will show you an example below to demonstrate exactly what it does to shed more light into its use&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;trainset&lt;/code&gt; and &lt;code&gt;testset&lt;/code&gt; contain the actual dataset object. Notice I use &lt;code&gt;train=True&lt;/code&gt; to specify that this corresponds to the training dataset, and I use &lt;code&gt;train=False&lt;/code&gt; to specify that this is the remainder of the dataset which we call the testset. From the portion I printed above you can see that the split of the data was 85% (60000) / 15% (10000), corresponding to the portions of samples for training set and testing set, respectively. &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;trainloader&lt;/code&gt; is what holds the data loader object which takes care of shuffling the data and constructing the batches.&lt;/li&gt;
-&lt;/ul&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This is a beginner's tutorial so I will break down things a bit here:</p>
+<ul>
+<li><code>BATCH_SIZE</code> is a parameter that denotes the batch size we will use for our model</li>
+<li><code>transform</code> holds code for whatever transformations you will apply to your data. I will show you an example below to demonstrate exactly what it does to shed more light into its use</li>
+<li><code>trainset</code> and <code>testset</code> contain the actual dataset object. Notice I use <code>train=True</code> to specify that this corresponds to the training dataset, and I use <code>train=False</code> to specify that this is the remainder of the dataset which we call the testset. From the portion I printed above you can see that the split of the data was 85% (60000) / 15% (10000), corresponding to the portions of samples for training set and testing set, respectively. </li>
+<li><code>trainloader</code> is what holds the data loader object which takes care of shuffling the data and constructing the batches.</li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;Now let's look at that &lt;code&gt;transforms.Compose(...)&lt;/code&gt; function and see what it does. We will use a randomized image to demonstrate its use. Let's generate an image.&lt;/p&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now let's look at that <code>transforms.Compose(...)</code> function and see what it does. We will use a randomized image to demonstrate its use. Let's generate an image.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transforms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ToPILImage&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;mode&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;L&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;randn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;96&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;96&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">image</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">ToPILImage</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s1">&#39;L&#39;</span><span class="p">)(</span><span class="n">torch</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">96</span><span class="p">,</span> <span class="mi">96</span><span class="p">))</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;And let's render it:&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>And let's render it:</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
-
-
-
-&lt;div class=&quot;output_text output_subarea output_execute_result&quot;&gt;
-&lt;pre&gt;&amp;lt;matplotlib.image.AxesImage at 0x7f2a00da7898&amp;gt;&lt;/pre&gt;
-&lt;/div&gt;
-
-&lt;/div&gt;
-
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
 
 
-&lt;div class=&quot;output_png output_subarea &quot;&gt;
-&lt;img src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP4AAAD8CAYAAABXXhlaAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;matplotlib.image.AxesImage at 0x7f2a00da7898&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAP4AAAD8CAYAAABXXhlaAAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAADl0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uIDMuMC4zLCBo
 dHRwOi8vbWF0cGxvdGxpYi5vcmcvnQurowAAIABJREFUeJzsvWV8Fue2PnxNXAlRQoQYgQTX4l4o
 UNzdCxSXosWhxYprcSiuRUsLhdDi7oQAIUBCQjyEhPi8H67JrJzTvdvu/z6b95wfs74QnlnPzD33
@@ -1221,126 +1361,126 @@ VcAuLsHG1jKFhWCXLVllLSltUliaDUgKERHRpHElFvk2IbF0Rt498GGY6vKYCzOPae2y37rFmxHP
 ufvCrLV21p+Vn9yjnfVRf7gUmeMDO9wNvdz4Jee1/evlC577mdt/M6/xiUecD531RP4bPPTrCzxh
 i3tMhs53kPUKmz7rFab/Yc5Y4B2vWGIy9lkfnvy5F1FQlnsRBaX4EQWl+BEFpfgRBaX4EQWl+BEF
 pfgRBaX4EQV9A94D65YnPuOlAAAAAElFTkSuQmCC
-&quot; /&gt;
-&lt;/div&gt;
+" />
+</div>
 
-&lt;/div&gt;
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;Okay, we have our image sample. And now let's apply some dummy transformation to it. We are going to rotate the image by &lt;code&gt;45&lt;/code&gt; degrees. The transformation below takes care of that:&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Okay, we have our image sample. And now let's apply some dummy transformation to it. We are going to rotate the image by <code>45</code> degrees. The transformation below takes care of that:</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## dummy transformation&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;dummy_transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transforms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Compose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transforms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RandomRotation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)])&lt;/span&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## dummy transformation</span>
+<span class="n">dummy_transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">transforms</span><span class="o">.</span><span class="n">RandomRotation</span><span class="p">(</span><span class="mi">45</span><span class="p">)])</span>
 
-&lt;span class=&quot;n&quot;&gt;dummy_result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dummy_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+<span class="n">dummy_result</span> <span class="o">=</span> <span class="n">dummy_transform</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dummy_result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dummy_result</span><span class="p">)</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;Notice you can put the transformations within &lt;code&gt;transforms.Compose(...)&lt;/code&gt;. You can use the built in transformations offered by PyTorch or you can build your own and compose as you wish. In fact, you can place as many transformation as you wish in there. Let's try another composition of transformations: rotate + vertical flip.&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Notice you can put the transformations within <code>transforms.Compose(...)</code>. You can use the built in transformations offered by PyTorch or you can build your own and compose as you wish. In fact, you can place as many transformation as you wish in there. Let's try another composition of transformations: rotate + vertical flip.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## dummy transform &lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;dummy2_transform&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transforms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Compose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transforms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RandomRotation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;45&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;transforms&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;RandomVerticalFlip&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()])&lt;/span&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## dummy transform </span>
+<span class="n">dummy2_transform</span> <span class="o">=</span> <span class="n">transforms</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">transforms</span><span class="o">.</span><span class="n">RandomRotation</span><span class="p">(</span><span class="mi">45</span><span class="p">),</span> <span class="n">transforms</span><span class="o">.</span><span class="n">RandomVerticalFlip</span><span class="p">()])</span>
 
-&lt;span class=&quot;n&quot;&gt;dummy2_result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dummy2_transform&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;image&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+<span class="n">dummy2_result</span> <span class="o">=</span> <span class="n">dummy2_transform</span><span class="p">(</span><span class="n">image</span><span class="p">)</span>
 
-&lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dummy2_result&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dummy2_result</span><span class="p">)</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;That's pretty cool right! Keep trying other transform methods. On the topic of exploring our data further, let's take a look at our images dataset.&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>That's pretty cool right! Keep trying other transform methods. On the topic of exploring our data further, let's take a look at our images dataset.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Exploring-the-Data&quot;&gt;Exploring the Data&lt;a class=&quot;anchor-link&quot; href=&quot;#Exploring-the-Data&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;As a practioner and researcher, I am always spend a bit of time and effort exploring and understanding my datasets. It's fun and this is a good practise to ensure that everything is in order.&lt;/p&gt;
-&lt;p&gt;Let's check what the train and test dataset contain. I will use matplotlib to print out some of the images from our dataset. With a bit of numpy I can convert images into numpy and print them out. Below I print out an entire batch.&lt;/p&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exploring-the-Data">Exploring the Data<a class="anchor-link" href="#Exploring-the-Data"> </a></h2><p>As a practioner and researcher, I am always spend a bit of time and effort exploring and understanding my datasets. It's fun and this is a good practise to ensure that everything is in order.</p>
+<p>Let's check what the train and test dataset contain. I will use matplotlib to print out some of the images from our dataset. With a bit of numpy I can convert images into numpy and print them out. Below I print out an entire batch.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## functions to show an image&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;c1&quot;&gt;#img = img / 2 + 0.5     # unnormalize&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;npimg&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;img&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;numpy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;plt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;np&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transpose&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;npimg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)))&lt;/span&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## functions to show an image</span>
+<span class="k">def</span> <span class="nf">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">):</span>
+    <span class="c1">#img = img / 2 + 0.5     # unnormalize</span>
+    <span class="n">npimg</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">numpy</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">transpose</span><span class="p">(</span><span class="n">npimg</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)))</span>
 
-&lt;span class=&quot;c1&quot;&gt;## get some random training images&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;dataiter&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;iter&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trainloader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dataiter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+<span class="c1">## get some random training images</span>
+<span class="n">dataiter</span> <span class="o">=</span> <span class="nb">iter</span><span class="p">(</span><span class="n">trainloader</span><span class="p">)</span>
+<span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="o">=</span> <span class="n">dataiter</span><span class="o">.</span><span class="n">next</span><span class="p">()</span>
 
-&lt;span class=&quot;c1&quot;&gt;## show images&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;imshow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torchvision&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;utils&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;make_grid&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<span class="c1">## show images</span>
+<span class="n">imshow</span><span class="p">(</span><span class="n">torchvision</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">make_grid</span><span class="p">(</span><span class="n">images</span><span class="p">))</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
 
 
-&lt;div class=&quot;output_png output_subarea &quot;&gt;
-&lt;img src=&quot;data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXoAAADLCAYAAABgQVj0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAXoAAADLCAYAAABgQVj0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlz
 AAALEgAACxIB0t1+/AAAADl0RVh0U29mdHdhcmUAbWF0cGxvdGxpYiB2ZXJzaW9uIDMuMC4zLCBo
 dHRwOi8vbWF0cGxvdGxpYi5vcmcvnQurowAAIABJREFUeJzsnXd4VEXXwH83QAiEIKEHAQOhqvQm
 PQSUIghCQFAwAsorvRdRFAtNCAoIKr2+VCkCNsBQBMSXXqR8SA8lID0JIdk93x/LHbNpJGQLxPk9
@@ -1700,413 +1840,456 @@ oLbjJyLORMT5iPgHeIvm9ExtciLpSooi/05EfJBOe6x0kLvQfwn0SZop6SqKfyLtzBxTFpKulnRt
 U8yjPl2WA0AUq7aOA/uBe3LHP445eTv9zYMURWx6y/1rUk6OAAtzx9+jnMynmJYZBPalx6K6j5Wy
 h3fGmplVXO6pGzMz6zEXejOzinOhNzOrOBd6M7OKc6E3M6s4F3ozs4pzoTczqzgXejOzivsXOOc7
 UcUMi34AAAAASUVORK5CYII=
-&quot; /&gt;
-&lt;/div&gt;
+" />
+</div>
 
-&lt;/div&gt;
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;The dimensions of our batches are as follow:&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The dimensions of our batches are as follow:</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trainloader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Image batch dimensions:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Image label dimensions:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">trainloader</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Image batch dimensions:&quot;</span><span class="p">,</span> <span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Image label dimensions:&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">break</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Image batch dimensions: torch.Size([32, 1, 28, 28])
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Image batch dimensions: torch.Size([32, 1, 28, 28])
 Image label dimensions: torch.Size([32])
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;The-Model&quot;&gt;The Model&lt;a class=&quot;anchor-link&quot; href=&quot;#The-Model&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Now it's time to build the deep learning model that will be used to perform the image classification. We will keeps things simple and stack a few dense layers and a dropout layer to train our model.&lt;/p&gt;
-&lt;p&gt;Let's discuss a bit about the model:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;First of all the following structure involving a &lt;code&gt;class&lt;/code&gt; is standard code that's used to build the neural network model in PyTorch:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;fm&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;fm&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-Model">The Model<a class="anchor-link" href="#The-Model"> </a></h2><p>Now it's time to build the deep learning model that will be used to perform the image classification. We will keeps things simple and stack a few dense layers and a dropout layer to train our model.</p>
+<p>Let's discuss a bit about the model:</p>
+<ul>
+<li>First of all the following structure involving a <code>class</code> is standard code that's used to build the neural network model in PyTorch:</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 
-        &lt;span class=&quot;c1&quot;&gt;# layers go here&lt;/span&gt;
+        <span class="c1"># layers go here</span>
 
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
 
-        &lt;span class=&quot;c1&quot;&gt;# computations go here&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;The layers are defined inside &lt;code&gt;def __init__()&lt;/code&gt;. &lt;code&gt;super(...).__init__()&lt;/code&gt; is just there to stick things together. For our model, we stack a hidden layer (&lt;code&gt;self.d1&lt;/code&gt;) followed by a dropout layer (&lt;code&gt;self.dropout&lt;/code&gt;), which is then followed by an output layer (&lt;code&gt;self.d2&lt;/code&gt;). &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;nn.Linear(...)&lt;/code&gt; defines the dense layer and it requires the &lt;code&gt;in&lt;/code&gt; and &lt;code&gt;out&lt;/code&gt; dimensions, which corresponds to the size of the input feature and output feature of that layer, respectively. &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;nn.Dropout(...)&lt;/code&gt; is used to define a dropout layer. Dropout is an approach in deep learning that helps a model to avoid overfitting. This means that dropout acts as a regularization technique that helps the model to not overfit on the images it has seen while training. We want this because we need a model that generalizes well to unseen examples -- in our case, the testing dataset. Dropout randomly zeroes some of the units of the neural network layer with probability of &lt;code&gt;p=0.2&lt;/code&gt;. Read more about the dropout layer &lt;a href=&quot;https://pytorch.org/docs/stable/nn.html#dropout&quot;&gt;here&lt;/a&gt;. &lt;/li&gt;
-&lt;li&gt;The entry point of the model, i.e. where the data enters, is placed under the &lt;code&gt;forward(...)&lt;/code&gt; function. Typically, we also place other transformations we perform on the data while training inside this function. &lt;/li&gt;
-&lt;li&gt;In the &lt;code&gt;forward()&lt;/code&gt; function we are performing a series of computations on the input data&lt;ul&gt;
-&lt;li&gt;we flatten the images first, converting it from 2D (&lt;code&gt;28 X 28&lt;/code&gt;) to 1D (&lt;code&gt;1 X 784&lt;/code&gt;).&lt;/li&gt;
-&lt;li&gt;then we feed the batches of those 1D images into the first hidden layer&lt;/li&gt;
-&lt;li&gt;the output of that hidden layer is then applied a &lt;a href=&quot;https://en.wikipedia.org/wiki/Rectifier_(neural_networks&quot;&gt;non-linear activate function&lt;/a&gt;) called &lt;code&gt;ReLU&lt;/code&gt;. It's not so important to know what &lt;code&gt;F.relu()&lt;/code&gt; does at the moment, but the effect that it achieves is that it allows faster and more effective training of neural architectures on large datasets&lt;/li&gt;
-&lt;li&gt;as explained above, the dropout also helps the model to train more efficiently by avoiding overfitting on the training data&lt;/li&gt;
-&lt;li&gt;we then feed the output of that dropout layer into the output layer (&lt;code&gt;d2&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;the result of that is then fed to the &lt;a href=&quot;https://en.wikipedia.org/wiki/Softmax_function&quot;&gt;softmax function&lt;/a&gt;, which converts or normalized the output into a probability distribution which helps with outputting proper predictions values that are used to calculate the accuracy of the model; this will the final output of the model&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+        <span class="c1"># computations go here</span>
+</pre></div>
+<ul>
+<li>The layers are defined inside <code>def __init__()</code>. <code>super(...).__init__()</code> is just there to stick things together. For our model, we stack a hidden layer (<code>self.d1</code>) followed by a dropout layer (<code>self.dropout</code>), which is then followed by an output layer (<code>self.d2</code>). </li>
+<li><code>nn.Linear(...)</code> defines the dense layer and it requires the <code>in</code> and <code>out</code> dimensions, which corresponds to the size of the input feature and output feature of that layer, respectively. </li>
+<li><code>nn.Dropout(...)</code> is used to define a dropout layer. Dropout is an approach in deep learning that helps a model to avoid overfitting. This means that dropout acts as a regularization technique that helps the model to not overfit on the images it has seen while training. We want this because we need a model that generalizes well to unseen examples -- in our case, the testing dataset. Dropout randomly zeroes some of the units of the neural network layer with probability of <code>p=0.2</code>. Read more about the dropout layer <a href="https://pytorch.org/docs/stable/nn.html#dropout">here</a>. </li>
+<li>The entry point of the model, i.e. where the data enters, is placed under the <code>forward(...)</code> function. Typically, we also place other transformations we perform on the data while training inside this function. </li>
+<li>In the <code>forward()</code> function we are performing a series of computations on the input data<ul>
+<li>we flatten the images first, converting it from 2D (<code>28 X 28</code>) to 1D (<code>1 X 784</code>).</li>
+<li>then we feed the batches of those 1D images into the first hidden layer</li>
+<li>the output of that hidden layer is then applied a <a href="https://en.wikipedia.org/wiki/Rectifier_(neural_networks">non-linear activate function</a>) called <code>ReLU</code>. It's not so important to know what <code>F.relu()</code> does at the moment, but the effect that it achieves is that it allows faster and more effective training of neural architectures on large datasets</li>
+<li>as explained above, the dropout also helps the model to train more efficiently by avoiding overfitting on the training data</li>
+<li>we then feed the output of that dropout layer into the output layer (<code>d2</code>)</li>
+<li>the result of that is then fed to the <a href="https://en.wikipedia.org/wiki/Softmax_function">softmax function</a>, which converts or normalized the output into a probability distribution which helps with outputting proper predictions values that are used to calculate the accuracy of the model; this will the final output of the model</li>
+</ul>
+</li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## the model&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Module&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;fm&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;nb&quot;&gt;super&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;fm&quot;&gt;__init__&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d1&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Linear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;28&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;28&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dropout&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;p&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mf&quot;&gt;0.2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Linear&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;128&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## the model</span>
+<span class="k">class</span> <span class="nc">MyModel</span><span class="p">(</span><span class="n">nn</span><span class="o">.</span><span class="n">Module</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MyModel</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">28</span> <span class="o">*</span> <span class="mi">28</span><span class="p">,</span> <span class="mi">128</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Dropout</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">d2</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
     
-    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;forward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;flatten&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;start_dim&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;relu&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dropout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;logits&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;bp&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;d2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;softmax&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;logits&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+    <span class="k">def</span> <span class="nf">forward</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">flatten</span><span class="p">(</span><span class="n">start_dim</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d1</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">logits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">d2</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">F</span><span class="o">.</span><span class="n">softmax</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">out</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;Visually, the following is a diagram of the model we have built. Just keep in mind that the hidden layer is much bigger as shown in the diagram but due to space constraint, the diagram is just an approximation to the actual model.&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;https://drive.google.com/uc?export=view&amp;amp;id=1NuFflDPOW_hIAHTH2pXZAEhSINygPlnB&quot; alt=&quot;alt text&quot; /&gt;&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Visually, the following is a diagram of the model we have built. Just keep in mind that the hidden layer is much bigger as shown in the diagram but due to space constraint, the diagram is just an approximation to the actual model.</p>
+<p><img src="https://drive.google.com/uc?export=view&amp;id=1NuFflDPOW_hIAHTH2pXZAEhSINygPlnB" alt="alt text" /></p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;As I have done in my previous tutorials, I always encourage to test the model with 1 batch to ensure that the output dimensions are what we expect. Notice how we are iterating over the dataloader which conveniently stores the &lt;code&gt;images&lt;/code&gt; and &lt;code&gt;labels&lt;/code&gt; pairs. &lt;code&gt;out&lt;/code&gt; contains the output of the model, which are the logits applied a &lt;code&gt;softmax&lt;/code&gt; layer which helps with prediction.&lt;/p&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As I have done in my previous tutorials, I always encourage to test the model with 1 batch to ensure that the output dimensions are what we expect. Notice how we are iterating over the dataloader which conveniently stores the <code>images</code> and <code>labels</code> pairs. <code>out</code> contains the output of the model, which are the logits applied a <code>softmax</code> layer which helps with prediction.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## test the model with 1 batch&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;trainloader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;batch size:&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;out&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shape&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## test the model with 1 batch</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">MyModel</span><span class="p">()</span>
+<span class="k">for</span> <span class="n">images</span><span class="p">,</span> <span class="n">labels</span> <span class="ow">in</span> <span class="n">trainloader</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;batch size:&quot;</span><span class="p">,</span> <span class="n">images</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+    <span class="k">break</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;batch size: torch.Size([32, 1, 28, 28])
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>batch size: torch.Size([32, 1, 28, 28])
 torch.Size([32, 10])
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;We can clearly see that we get back the batches with 10 output values associate with it. These are used to compute the performance of the model.&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can clearly see that we get back the batches with 10 output values associate with it. These are used to compute the performance of the model.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Training-the-Model&quot;&gt;Training the Model&lt;a class=&quot;anchor-link&quot; href=&quot;#Training-the-Model&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Now we are ready to train the model but before that we are going to setup a loss function, an optimizer and a function to compute accuracy of the model.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The &lt;code&gt;learning_rate&lt;/code&gt; is the rate at which the model will try to optimize its weights, which is just another parameter for the model. &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;num_epochs&lt;/code&gt; is the number of training steps. &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;device&lt;/code&gt; determines what hardware we will use to train the model. If a &lt;code&gt;gpu&lt;/code&gt; is present, then that will be used, otherwise it defaults to the &lt;code&gt;cpu&lt;/code&gt;.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;model&lt;/code&gt; is just the model instance.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;model.to(device)&lt;/code&gt; is in charge of setting the actaull device that will be used for training the model&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;criterion&lt;/code&gt; is just the metric that's used to compute the loss of the model while it forward and backward trains to optimize its weights. &lt;/li&gt;
-&lt;li&gt;&lt;code&gt;optimizer&lt;/code&gt; is the optimization technique used to modify the weights in the backward propagation. Notice that it requires the &lt;code&gt;learning_rate&lt;/code&gt; and the model parameters which are part of the calculation to optimize weights.&lt;/li&gt;
-&lt;/ul&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Training-the-Model">Training the Model<a class="anchor-link" href="#Training-the-Model"> </a></h2><p>Now we are ready to train the model but before that we are going to setup a loss function, an optimizer and a function to compute accuracy of the model.</p>
+<ul>
+<li>The <code>learning_rate</code> is the rate at which the model will try to optimize its weights, which is just another parameter for the model. </li>
+<li><code>num_epochs</code> is the number of training steps. </li>
+<li><code>device</code> determines what hardware we will use to train the model. If a <code>gpu</code> is present, then that will be used, otherwise it defaults to the <code>cpu</code>.</li>
+<li><code>model</code> is just the model instance.</li>
+<li><code>model.to(device)</code> is in charge of setting the actaull device that will be used for training the model</li>
+<li><code>criterion</code> is just the metric that's used to compute the loss of the model while it forward and backward trains to optimize its weights. </li>
+<li><code>optimizer</code> is the optimization technique used to modify the weights in the backward propagation. Notice that it requires the <code>learning_rate</code> and the model parameters which are part of the calculation to optimize weights.</li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.001&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;num_epochs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">learning_rate</span> <span class="o">=</span> <span class="mf">0.001</span>
+<span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">5</span>
 
-&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;cuda:0&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;cuda&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;is_available&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;cpu&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;MyModel&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;criterion&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CrossEntropyLoss&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;optim&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Adam&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;parameters&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;lr&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;learning_rate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s2">&quot;cuda:0&quot;</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;cpu&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">MyModel</span><span class="p">()</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">CrossEntropyLoss</span><span class="p">()</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">Adam</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="n">learning_rate</span><span class="p">)</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;The utility function below helps to calculate the accuracy of the model. For now, it's not important to understand how it's calculated but basically it compares the outputs of the model (predictions) with the actual target values (i.e., the labels of the dataset), and tries to compute the average of correct predictions.&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The utility function below helps to calculate the accuracy of the model. For now, it's not important to understand how it's calculated but basically it compares the outputs of the model (predictions) with the actual target values (i.e., the labels of the dataset), and tries to compute the average of correct predictions.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## utility function to compute accuracy&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;get_accuracy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;sd&quot;&gt;&amp;#39;&amp;#39;&amp;#39; Obtain accuracy for training round &amp;#39;&amp;#39;&amp;#39;&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;corrects&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;torch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;output&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;())&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;data&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sum&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;accuracy&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;100.0&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;corrects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;batch_size&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;accuracy&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## utility function to compute accuracy</span>
+<span class="k">def</span> <span class="nf">get_accuracy</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">batch_size</span><span class="p">):</span>
+    <span class="sd">&#39;&#39;&#39; Obtain accuracy for training round &#39;&#39;&#39;</span>
+    <span class="n">corrects</span> <span class="o">=</span> <span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="mi">1</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">view</span><span class="p">(</span><span class="n">target</span><span class="o">.</span><span class="n">size</span><span class="p">())</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="n">target</span><span class="o">.</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">accuracy</span> <span class="o">=</span> <span class="mf">100.0</span> <span class="o">*</span> <span class="n">corrects</span><span class="o">/</span><span class="n">batch_size</span>
+    <span class="k">return</span> <span class="n">accuracy</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Training-the-Model&quot;&gt;Training the Model&lt;a class=&quot;anchor-link&quot; href=&quot;#Training-the-Model&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Now it's time to train the model. The code portion that follows can be descrive in the following steps:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;The first thing in training a neural network model is defining the training loop, which is achieved by:&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epoch&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num_epochs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;...&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
-&lt;ul&gt;
-&lt;li&gt;We define two variables, &lt;code&gt;training_running_loss&lt;/code&gt; and &lt;code&gt;train_acc&lt;/code&gt; that will help us to monitor the running accuracy and loss of the modes while it trains over the different batches.&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;model.train()&lt;/code&gt; explicitly indicates that we are ready to start training. &lt;/li&gt;
-&lt;li&gt;Notice how we are iterating over the dataloader, which conveniently gives us the batches in image-label pairs. &lt;/li&gt;
-&lt;li&gt;That second &lt;code&gt;for&lt;/code&gt; loop means that for every training step we will iterate over all the batches and train the model over them.&lt;/li&gt;
-&lt;li&gt;We feed the model the images via &lt;code&gt;model(images)&lt;/code&gt; and the output are the predictions of the model. &lt;/li&gt;
-&lt;li&gt;The predictions together with the target labels are used to compute the loss using the loss function we defined earlier.&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Before we update our weights for the next round of training, we perform the following steps:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;we use the optimizer object to reset all the gradients for the variables it will update. This is a safe step and it doesn't overwrites the gradients the model accumulates while training (those are stored in a buffer &lt;a href=&quot;https://pytorch.org/tutorials/beginner/pytorch_with_examples.html#pytorch-optim&quot;&gt;link text&lt;/a&gt; via the `loss.backward() call)&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;loss.backward()&lt;/code&gt; simply computes the gradient of the loss w.r.t to the model parameters&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;optimizer.step()&lt;/code&gt; then ensures that the model parameters are updated&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;Then we gather and accumulate the loss and accuracy, which is what we will use to tell us if the model is learning properly&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Training-the-Model">Training the Model<a class="anchor-link" href="#Training-the-Model"> </a></h2><p>Now it's time to train the model. The code portion that follows can be descrive in the following steps:</p>
+<ul>
+<li>The first thing in training a neural network model is defining the training loop, which is achieved by:</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+<ul>
+<li>We define two variables, <code>training_running_loss</code> and <code>train_acc</code> that will help us to monitor the running accuracy and loss of the modes while it trains over the different batches.</li>
+<li><code>model.train()</code> explicitly indicates that we are ready to start training. </li>
+<li>Notice how we are iterating over the dataloader, which conveniently gives us the batches in image-label pairs. </li>
+<li>That second <code>for</code> loop means that for every training step we will iterate over all the batches and train the model over them.</li>
+<li>We feed the model the images via <code>model(images)</code> and the output are the predictions of the model. </li>
+<li>The predictions together with the target labels are used to compute the loss using the loss function we defined earlier.</li>
+<li><p>Before we update our weights for the next round of training, we perform the following steps:</p>
+<ul>
+<li>we use the optimizer object to reset all the gradients for the variables it will update. This is a safe step and it doesn't overwrites the gradients the model accumulates while training (those are stored in a buffer <a href="https://pytorch.org/tutorials/beginner/pytorch_with_examples.html#pytorch-optim">link text</a> via the `loss.backward() call)</li>
+<li><code>loss.backward()</code> simply computes the gradient of the loss w.r.t to the model parameters</li>
+<li><code>optimizer.step()</code> then ensures that the model parameters are updated</li>
+</ul>
+</li>
+<li><p>Then we gather and accumulate the loss and accuracy, which is what we will use to tell us if the model is learning properly</p>
+</li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;## train the model&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;epoch&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;range&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num_epochs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;train_running_loss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;train_acc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## train the model</span>
+<span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+    <span class="n">train_running_loss</span> <span class="o">=</span> <span class="mf">0.0</span>
+    <span class="n">train_acc</span> <span class="o">=</span> <span class="mf">0.0</span>
 
-    &lt;span class=&quot;c1&quot;&gt;## commence training&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;train&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+    <span class="c1">## commence training</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
 
-    &lt;span class=&quot;c1&quot;&gt;## training step&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;trainloader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
+    <span class="c1">## training step</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">trainloader</span><span class="p">):</span>
         
-        &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        <span class="n">images</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
 
-        &lt;span class=&quot;c1&quot;&gt;## forward + backprop + loss&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;predictions&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;loss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;criterion&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predictions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zero_grad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;loss&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backward&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        <span class="c1">## forward + backprop + loss</span>
+        <span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+        <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+        <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
 
-        &lt;span class=&quot;c1&quot;&gt;## update model params&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;optimizer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;step&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+        <span class="c1">## update model params</span>
+        <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
 
-        &lt;span class=&quot;n&quot;&gt;train_running_loss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;loss&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;detach&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;item&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;train_acc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get_accuracy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;predictions&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BATCH_SIZE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+        <span class="n">train_running_loss</span> <span class="o">+=</span> <span class="n">loss</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()</span>
+        <span class="n">train_acc</span> <span class="o">+=</span> <span class="n">get_accuracy</span><span class="p">(</span><span class="n">predictions</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">BATCH_SIZE</span><span class="p">)</span>
     
-    &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;eval&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
-    &lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Epoch: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%d&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; | Loss: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%.4f&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt; | Train Accuracy: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%.2f&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&lt;/span&gt; \
-          &lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;epoch&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_running_loss&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;train_acc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt; 
-&lt;/pre&gt;&lt;/div&gt;
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Epoch: </span><span class="si">%d</span><span class="s1"> | Loss: </span><span class="si">%.4f</span><span class="s1"> | Train Accuracy: </span><span class="si">%.2f</span><span class="s1">&#39;</span> \
+          <span class="o">%</span><span class="p">(</span><span class="n">epoch</span><span class="p">,</span> <span class="n">train_running_loss</span> <span class="o">/</span> <span class="n">i</span><span class="p">,</span> <span class="n">train_acc</span><span class="o">/</span><span class="n">i</span><span class="p">))</span> 
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Epoch: 0 | Loss: 1.6167 | Train Accuracy: 86.02
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch: 0 | Loss: 1.6167 | Train Accuracy: 86.02
 Epoch: 1 | Loss: 1.5299 | Train Accuracy: 93.26
 Epoch: 2 | Loss: 1.5143 | Train Accuracy: 94.69
 Epoch: 3 | Loss: 1.5059 | Train Accuracy: 95.46
 Epoch: 4 | Loss: 1.5003 | Train Accuracy: 95.98
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;p&gt;After all the training steps are over, we can clearly see that the loss keeps decreasing while the training accuracy of the model keeps rising, which is a good sign that the model is effectively learning to classify images.&lt;/p&gt;
-&lt;p&gt;We can verify that by computing the accuracy on the testing dataset to see how well the model performs on the image classificaiton task. As you can see below, our basic CNN model is performing very well on the MNIST classification task.&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>After all the training steps are over, we can clearly see that the loss keeps decreasing while the training accuracy of the model keeps rising, which is a good sign that the model is effectively learning to classify images.</p>
+<p>We can verify that by computing the accuracy on the testing dataset to see how well the model performs on the image classificaiton task. As you can see below, our basic CNN model is performing very well on the MNIST classification task.</p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
+</div>
     
     
-&lt;div class=&quot;cell border-box-sizing code_cell rendered&quot;&gt;
-&lt;div class=&quot;input&quot;&gt;
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-&lt;div class=&quot;inner_cell&quot;&gt;
-    &lt;div class=&quot;input_area&quot;&gt;
-&lt;div class=&quot; highlight hl-ipython3&quot;&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;test_acc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;0.0&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;ow&quot;&gt;in&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;enumerate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;testloader&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;):&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;device&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;model&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;images&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;test_acc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;get_accuracy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;outputs&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;labels&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;BATCH_SIZE&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_acc</span> <span class="o">=</span> <span class="mf">0.0</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">images</span><span class="p">,</span> <span class="n">labels</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">testloader</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="n">images</span> <span class="o">=</span> <span class="n">images</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">labels</span> <span class="o">=</span> <span class="n">labels</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+    <span class="n">outputs</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images</span><span class="p">)</span>
+    <span class="n">test_acc</span> <span class="o">+=</span> <span class="n">get_accuracy</span><span class="p">(</span><span class="n">outputs</span><span class="p">,</span> <span class="n">labels</span><span class="p">,</span> <span class="n">BATCH_SIZE</span><span class="p">)</span>
         
-&lt;span class=&quot;nb&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;Test Accuracy: &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%.2f&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;test_acc&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Test Accuracy: </span><span class="si">%.2f</span><span class="s1">&#39;</span><span class="o">%</span><span class="p">(</span> <span class="n">test_acc</span><span class="o">/</span><span class="n">i</span><span class="p">))</span>
+</pre></div>
 
-    &lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+    </div>
+</div>
+</div>
 
-&lt;div class=&quot;output_wrapper&quot;&gt;
-&lt;div class=&quot;output&quot;&gt;
+<div class="output_wrapper">
+<div class="output">
 
-&lt;div class=&quot;output_area&quot;&gt;
+<div class="output_area">
 
-&lt;div class=&quot;output_subarea output_stream output_stdout output_text&quot;&gt;
-&lt;pre&gt;Test Accuracy: 96.32
-&lt;/pre&gt;
-&lt;/div&gt;
-&lt;/div&gt;
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Test Accuracy: 96.32
+</pre>
+</div>
+</div>
 
-&lt;/div&gt;
-&lt;/div&gt;
+</div>
+</div>
 
-&lt;/div&gt;
+</div>
     
 
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;Final-Words&quot;&gt;Final Words&lt;a class=&quot;anchor-link&quot; href=&quot;#Final-Words&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Congratulation! You have made it to the end of this tutorial. This is a really long tutorial that aims to give an very basic introduction to the fundamentals of image classification using neural networks and PyTorch.&lt;/p&gt;
-&lt;p&gt;&lt;em&gt;This tutorial was heavily inspired by this &lt;a href=&quot;https://www.tensorflow.org/beta/tutorials/quickstart/beginner&quot;&gt;TensorFlow tutorial.&lt;/a&gt; We thank the authors of the corresponding reference for their valuable work.&lt;/em&gt;&lt;/p&gt;
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Final-Words">Final Words<a class="anchor-link" href="#Final-Words"> </a></h2><p>Congratulation! You have made it to the end of this tutorial. This is a really long tutorial that aims to give an very basic introduction to the fundamentals of image classification using neural networks and PyTorch.</p>
+<p><em>This tutorial was heavily inspired by this <a href="https://www.tensorflow.org/beta/tutorials/quickstart/beginner">TensorFlow tutorial.</a> We thank the authors of the corresponding reference for their valuable work.</em></p>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;div class=&quot;cell border-box-sizing text_cell rendered&quot;&gt;&lt;div class=&quot;inner_cell&quot;&gt;
-&lt;div class=&quot;text_cell_render border-box-sizing rendered_html&quot;&gt;
-&lt;h2 id=&quot;References&quot;&gt;References&lt;a class=&quot;anchor-link&quot; href=&quot;#References&quot;&gt; &lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;https://medium.com/dair-ai/pytorch-1-2-quickstart-with-google-colab-6690a30c38d&quot;&gt;PyTorch 1.2 Quickstart with Google Colab&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://www.tensorflow.org/beta/tutorials/quickstart/beginner&quot;&gt;Get started with TensorFlow 2.0 for beginners&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;https://pytorch.org/tutorials/beginner/data_loading_tutorial.html&quot;&gt;PyTorch Data Loading Tutorial&lt;/a&gt;
--&lt;a href=&quot;https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html#sphx-glr-beginner-blitz-neural-networks-tutorial-py&quot;&gt; Neural Networks with PyTorch&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References"> </a></h2><ul>
+<li><a href="https://medium.com/dair-ai/pytorch-1-2-quickstart-with-google-colab-6690a30c38d">PyTorch 1.2 Quickstart with Google Colab</a></li>
+<li><a href="https://www.tensorflow.org/beta/tutorials/quickstart/beginner">Get started with TensorFlow 2.0 for beginners</a></li>
+<li><a href="https://pytorch.org/tutorials/beginner/data_loading_tutorial.html">PyTorch Data Loading Tutorial</a>
+-<a href="https://pytorch.org/tutorials/beginner/blitz/neural_networks_tutorial.html#sphx-glr-beginner-blitz-neural-networks-tutorial-py"> Neural Networks with PyTorch</a></li>
+</ul>
 
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;
-&lt;/div&gt;</content><author><name></name></author><summary type="html"></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://dair-ai.github.io/notebooks" /><media:content medium="image" url="https://dair-ai.github.io/notebooks" xmlns:media="http://search.yahoo.com/mrss/" /></entry></feed>
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="dair-ai/notebooks"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/notebooks/pytorch/beginner/deep%20learning/2020/03/18/A_Gentle_Introduction_to_PyTorch_1_2.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/notebooks/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/notebooks/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/notebooks/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Sharing data science notebooks made easy.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/dair-ai" title="dair-ai"><svg class="svg-icon grey"><use xlink:href="/notebooks/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/dair_ai" title="dair_ai"><svg class="svg-icon grey"><use xlink:href="/notebooks/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
