@@ -10,7 +10,7 @@ This is a place to host and share data science notebooks that range from beginne
 
 Sharing is easy! Just upload your notebooks to the `_notebooks` folder.
 
-https://dair-ai.github.io/notebooks/
+https://dair.ai/notebooks/
 
 
 _powered by [fastpages](https://github.com/fastai/fastpages)_
