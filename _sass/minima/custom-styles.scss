@@ -1,11 +1,16 @@
 /*-----------------------------------*/
 /*--- IMPORT STYLES FOR FASTPAGES ---*/
-@import "minima/fastpages-styles";   
+@import "minima/fastpages-styles";
 
 
 
 /*-----------------------------------*/
 /*----- ADD YOUR STYLES BELOW -------*/
 
+// Change the header background-color
+.site-header{
+  border-top: 5px solid #9695e3;
+}
+
 // If you want to turn off dark background for syntax highlighting, comment or delete the below line.
-@import "minima/fastpages-dracula-highlight"; 
+@import "minima/fastpages-dracula-highlight";
