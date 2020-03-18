@@ -14,7 +14,7 @@ https://dair.ai/notebooks/
 
 ### How to Contribute
 1) Have your Jupyter notebook ready for publication. Make sure you follow this [guideline](https://github.com/fastai/fastpages#writing-blog-posts-with-jupyter) to leverage all the amazing features of fastpages. 
-2) Then ask for an invite to be able to commit to this repo. Email me directly to ellfae@mgail.com or [DM on Twitter](https://twitter.com/omarsar0).  
+2) Then ask for an invite to be able to commit to this repo. Email me directly to ellfae@gmail.com or [DM on Twitter](https://twitter.com/omarsar0).  
 3) You can then upload your notebook directly to the [`_notebooks`](https://github.com/dair-ai/notebooks/tree/master/_notebooks) folder. Ensure that the notebook follows the following naming convention: `YYYY-MM-DD-Name-of-your-notebook.ipynb`.
 4) Notebooks will then be reviewed and published. This will also be followed by a special feature in the upcoming [NLP Newsletter](https://github.com/dair-ai/nlp_newsletter) where educational resources are shared to thousands of avid readers. 
 
