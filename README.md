@@ -8,9 +8,8 @@
 # Notebooks by dair.ai
 This is a place to host and share data science notebooks that range from beginner tutorials for deep learing to complete walkthrough of complex topics such as Transformers for NLP and object detection for CV. 
 
-Sharing is easy! Just upload your notebooks to the `_notebooks` folder.
+Sharing is easy! Just upload your notebooks to the `_notebooks` folder and it will be featured on our [website](https://dair.ai/notebooks/) and seen by thousands of avid learners.
 
-https://dair.ai/notebooks/
 
 ### How to Contribute
 1) Have your Jupyter notebook ready for publication. Make sure you follow this [guideline](https://github.com/fastai/fastpages#writing-blog-posts-with-jupyter) to leverage all the amazing features of fastpages. 
