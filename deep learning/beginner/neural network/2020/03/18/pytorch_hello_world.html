@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>A First Shot at Deep Learning with PyTorch | Notebooks by dair.ai</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="A First Shot at Deep Learning with PyTorch" />
+<meta name="author" content="Elvis Saravia" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="“Create a hello world for deep learning using PyTorch.”" />
+<meta property="og:description" content="“Create a hello world for deep learning using PyTorch.”" />
+<link rel="canonical" href="https://dair-ai.github.io/notebooks/deep%20learning/beginner/neural%20network/2020/03/18/pytorch_hello_world.html" />
+<meta property="og:url" content="https://dair-ai.github.io/notebooks/deep%20learning/beginner/neural%20network/2020/03/18/pytorch_hello_world.html" />
+<meta property="og:site_name" content="Notebooks by dair.ai" />
+<meta property="og:image" content="https://dair-ai.github.io/notebooks/images/model-nn.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-18T00:00:00-05:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Elvis Saravia"},"description":"“Create a hello world for deep learning using PyTorch.”","headline":"A First Shot at Deep Learning with PyTorch","dateModified":"2020-03-18T00:00:00-05:00","datePublished":"2020-03-18T00:00:00-05:00","@type":"BlogPosting","image":"https://dair-ai.github.io/notebooks/images/model-nn.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dair-ai.github.io/notebooks/deep%20learning/beginner/neural%20network/2020/03/18/pytorch_hello_world.html"},"url":"https://dair-ai.github.io/notebooks/deep%20learning/beginner/neural%20network/2020/03/18/pytorch_hello_world.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/notebooks/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://dair-ai.github.io/notebooks/feed.xml" title="Notebooks by dair.ai" /><link rel="shortcut icon" type="image/x-icon" href="/notebooks/images/favicon.png">
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>A First Shot at Deep Learning with PyTorch | Notebooks by dair.ai</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="A First Shot at Deep Learning with PyTorch" />
+<meta name="author" content="Elvis Saravia" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="“Create a hello world for deep learning using PyTorch.”" />
+<meta property="og:description" content="“Create a hello world for deep learning using PyTorch.”" />
+<link rel="canonical" href="https://dair-ai.github.io/notebooks/deep%20learning/beginner/neural%20network/2020/03/18/pytorch_hello_world.html" />
+<meta property="og:url" content="https://dair-ai.github.io/notebooks/deep%20learning/beginner/neural%20network/2020/03/18/pytorch_hello_world.html" />
+<meta property="og:site_name" content="Notebooks by dair.ai" />
+<meta property="og:image" content="https://dair-ai.github.io/notebooks/images/model-nn.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-18T00:00:00-05:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Elvis Saravia"},"description":"“Create a hello world for deep learning using PyTorch.”","headline":"A First Shot at Deep Learning with PyTorch","dateModified":"2020-03-18T00:00:00-05:00","datePublished":"2020-03-18T00:00:00-05:00","@type":"BlogPosting","image":"https://dair-ai.github.io/notebooks/images/model-nn.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dair-ai.github.io/notebooks/deep%20learning/beginner/neural%20network/2020/03/18/pytorch_hello_world.html"},"url":"https://dair-ai.github.io/notebooks/deep%20learning/beginner/neural%20network/2020/03/18/pytorch_hello_world.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://dair-ai.github.io/notebooks/feed.xml" title="Notebooks by dair.ai" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/notebooks/">Notebooks by dair.ai</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/notebooks/about/">About Me</a><a class="page-link" href="/notebooks/search/">Search</a><a class="page-link" href="/notebooks/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">A First Shot at Deep Learning with PyTorch</h1><p class="page-description">“Create a hello world for deep learning using PyTorch.”</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-18T00:00:00-05:00" itemprop="datePublished">
+        Mar 18, 2020
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Elvis Saravia</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      10 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/notebooks/categories/#deep learning">deep learning</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/notebooks/categories/#beginner">beginner</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/notebooks/categories/#neural network">neural network</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/dair-ai/notebooks/tree/master/_notebooks/2020-03-18-pytorch_hello_world.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/notebooks/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/dair-ai/notebooks/master?filepath=_notebooks%2F2020-03-18-pytorch_hello_world.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/notebooks/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/dair-ai/notebooks/blob/master/_notebooks/2020-03-18-pytorch_hello_world.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/notebooks/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-03-18-pytorch_hello_world.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="About">About<a class="anchor-link" href="#About"> </a></h2><p>In this notebook, we are going to take a baby step into the world of deep learning using PyTorch. There are a ton of notebooks out there that teach you the fundamentals of deep learning and PyTorch, so here the idea is to give you some basic introduction to deep learning and PyTorch at a very high level. Therefore, this notebook is targeting beginners but it can also serve as a review for more experienced developers.</p>
+<p>After completion of this notebook, you are expected to know the basic components of training a basic neural network with PyTorch. I have also left a couple of exercises towards the end with the intention of encouraging more research and practise of your deep learning skills.</p>
+<hr />
+<p><strong>Author:</strong> Elvis Saravia(<a href="(https://twitter.com/omarsar0">Twitter</a>) | <a href="https://www.linkedin.com/in/omarsar/">LinkedIn</a>)</p>
+<p><strong>Complete Code Walkthrough:</strong> <a href="https://medium.com/dair-ai/a-first-shot-at-deep-learning-with-pytorch-4a8252d30c75">Blog post</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Importing-the-libraries">Importing the libraries<a class="anchor-link" href="#Importing-the-libraries"> </a></h2><p>Like with any other programming exercise, the first step is to import the necessary libraries. As we are going to be using Google Colab to program our neural network, we need to install and import the necessary PyTorch libraries.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">!</span>pip3 install torch torchvision
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Requirement already satisfied: torch in /usr/local/lib/python3.6/dist-packages (1.4.0)
+Requirement already satisfied: torchvision in /usr/local/lib/python3.6/dist-packages (0.5.0)
+Requirement already satisfied: pillow&gt;=4.1.1 in /usr/local/lib/python3.6/dist-packages (from torchvision) (7.0.0)
+Requirement already satisfied: numpy in /usr/local/lib/python3.6/dist-packages (from torchvision) (1.18.1)
+Requirement already satisfied: six in /usr/local/lib/python3.6/dist-packages (from torchvision) (1.12.0)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## The usual imports</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
+
+<span class="c1">## print out the pytorch version used</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">torch</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1.4.0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-Neural-Network">The Neural Network<a class="anchor-link" href="#The-Neural-Network"> </a></h2><p><img src="https://drive.google.com/uc?export=view&amp;id=1Lpi4VPBfAV3JkOLopcsGK4L8dyxmPF1b" alt="alt text" /></p>
+<p>Before building and training a neural network the first step is to process and prepare the data. In this notebook, we are going to use syntethic data (i.e., fake data) so we won't be using any real world data.</p>
+<p>For the sake of simplicity, we are going to use the following input and output pairs converted to tensors, which is how data is typically represented in the world of deep learning. The x values represent the input of dimension <code>(6,1)</code> and the y values represent the output of similar dimension. The example is taken from this <a href="https://github.com/lmoroney/dlaicourse/blob/master/Course%201%20-%20Part%202%20-%20Lesson%202%20-%20Notebook.ipynb">tutorial</a>.</p>
+<p>The objective of the neural network model that we are going to build and train is to automatically learn patterns that better characterize the relationship between the <code>x</code> and <code>y</code> values. Essentially, the model learns the relationship that exists between inputs and outputs which can then be used to predict the corresponding <code>y</code> value for any given input <code>x</code>.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## our data in tensor form</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">],</span>  <span class="p">[</span><span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">4.0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([[</span><span class="o">-</span><span class="mf">3.0</span><span class="p">],</span> <span class="p">[</span><span class="o">-</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">5.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">7.0</span><span class="p">]],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## print size of the input tensor</span>
+<span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>torch.Size([6, 1])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="The-Neural-Network-Components">The Neural Network Components<a class="anchor-link" href="#The-Neural-Network-Components"> </a></h2><p>As said earlier, we are going to first define and build out the components of our neural network before training the model.</p>
+<h3 id="Model">Model<a class="anchor-link" href="#Model"> </a></h3><p>Typically, when building a neural network model, we define the layers and weights which form the basic components of the model. Below we show an example of how to define a hidden layer named <code>layer1</code> with size <code>(1, 1)</code>. For the purpose of this tutorial, we won't explicitly define the <code>weights</code> and allow the built-in functions provided by PyTorch to handle that part for us. By the way, the <code>nn.Linear(...)</code> function applies a linear transformation ($y = xA^T + b$) to the data that was provided as its input. We ignore the bias for now by setting <code>bias=False</code>.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Neural network with 1 hidden layer</span>
+<span class="n">layer1</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Linear</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span> <span class="n">bias</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">Sequential</span><span class="p">(</span><span class="n">layer1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Loss-and-Optimizer">Loss and Optimizer<a class="anchor-link" href="#Loss-and-Optimizer"> </a></h3><p>The loss function, <code>nn.MSELoss()</code>, is in charge of letting the model know how good it has learned the relationship between the input and output. The optimizer (in this case an <code>SGD</code>) primary role is to minimize or lower that loss value as it tunes its weights.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## loss function</span>
+<span class="n">criterion</span> <span class="o">=</span> <span class="n">nn</span><span class="o">.</span><span class="n">MSELoss</span><span class="p">()</span>
+
+<span class="c1">## optimizer algorithm</span>
+<span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">(),</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.01</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Training-the-Neural-Network-Model">Training the Neural Network Model<a class="anchor-link" href="#Training-the-Neural-Network-Model"> </a></h2><p>We have all the components we need to train our model. Below is the code used to train our model.</p>
+<p>In simple terms, we train the model by feeding it the input and output pairs for a couple of rounds (i.e., <code>epoch</code>). After a series of forward and backward steps, the model somewhat learns the relationship between x and y values. This is notable by the decrease in the computed <code>loss</code>. For a more detailed explanation of this code check out this <a href="https://medium.com/dair-ai/a-simple-neural-network-from-scratch-with-pytorch-and-google-colab-c7f3830618e0">tutorial</a>.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## training</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">150</span><span class="p">):</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">train</span><span class="p">()</span>
+
+    <span class="c1">## forward</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="n">criterion</span><span class="p">(</span><span class="n">output</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">zero_grad</span><span class="p">()</span>
+
+    <span class="c1">## backward + update model params </span>
+    <span class="n">loss</span><span class="o">.</span><span class="n">backward</span><span class="p">()</span>
+    <span class="n">optimizer</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+
+    <span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Epoch: </span><span class="si">%d</span><span class="s1"> | Loss: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">loss</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">()))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Epoch: 0 | Loss: 25.5853
+Epoch: 1 | Loss: 20.6815
+Epoch: 2 | Loss: 16.7388
+Epoch: 3 | Loss: 13.5688
+Epoch: 4 | Loss: 11.0201
+Epoch: 5 | Loss: 8.9709
+Epoch: 6 | Loss: 7.3234
+Epoch: 7 | Loss: 5.9987
+Epoch: 8 | Loss: 4.9337
+Epoch: 9 | Loss: 4.0774
+Epoch: 10 | Loss: 3.3889
+Epoch: 11 | Loss: 2.8353
+Epoch: 12 | Loss: 2.3903
+Epoch: 13 | Loss: 2.0325
+Epoch: 14 | Loss: 1.7448
+Epoch: 15 | Loss: 1.5134
+Epoch: 16 | Loss: 1.3275
+Epoch: 17 | Loss: 1.1779
+Epoch: 18 | Loss: 1.0577
+Epoch: 19 | Loss: 0.9610
+Epoch: 20 | Loss: 0.8833
+Epoch: 21 | Loss: 0.8208
+Epoch: 22 | Loss: 0.7706
+Epoch: 23 | Loss: 0.7302
+Epoch: 24 | Loss: 0.6977
+Epoch: 25 | Loss: 0.6716
+Epoch: 26 | Loss: 0.6506
+Epoch: 27 | Loss: 0.6338
+Epoch: 28 | Loss: 0.6202
+Epoch: 29 | Loss: 0.6093
+Epoch: 30 | Loss: 0.6005
+Epoch: 31 | Loss: 0.5935
+Epoch: 32 | Loss: 0.5878
+Epoch: 33 | Loss: 0.5832
+Epoch: 34 | Loss: 0.5796
+Epoch: 35 | Loss: 0.5766
+Epoch: 36 | Loss: 0.5742
+Epoch: 37 | Loss: 0.5723
+Epoch: 38 | Loss: 0.5708
+Epoch: 39 | Loss: 0.5696
+Epoch: 40 | Loss: 0.5686
+Epoch: 41 | Loss: 0.5678
+Epoch: 42 | Loss: 0.5671
+Epoch: 43 | Loss: 0.5666
+Epoch: 44 | Loss: 0.5662
+Epoch: 45 | Loss: 0.5659
+Epoch: 46 | Loss: 0.5656
+Epoch: 47 | Loss: 0.5654
+Epoch: 48 | Loss: 0.5652
+Epoch: 49 | Loss: 0.5651
+Epoch: 50 | Loss: 0.5650
+Epoch: 51 | Loss: 0.5649
+Epoch: 52 | Loss: 0.5648
+Epoch: 53 | Loss: 0.5648
+Epoch: 54 | Loss: 0.5647
+Epoch: 55 | Loss: 0.5647
+Epoch: 56 | Loss: 0.5646
+Epoch: 57 | Loss: 0.5646
+Epoch: 58 | Loss: 0.5646
+Epoch: 59 | Loss: 0.5646
+Epoch: 60 | Loss: 0.5646
+Epoch: 61 | Loss: 0.5646
+Epoch: 62 | Loss: 0.5645
+Epoch: 63 | Loss: 0.5645
+Epoch: 64 | Loss: 0.5645
+Epoch: 65 | Loss: 0.5645
+Epoch: 66 | Loss: 0.5645
+Epoch: 67 | Loss: 0.5645
+Epoch: 68 | Loss: 0.5645
+Epoch: 69 | Loss: 0.5645
+Epoch: 70 | Loss: 0.5645
+Epoch: 71 | Loss: 0.5645
+Epoch: 72 | Loss: 0.5645
+Epoch: 73 | Loss: 0.5645
+Epoch: 74 | Loss: 0.5645
+Epoch: 75 | Loss: 0.5645
+Epoch: 76 | Loss: 0.5645
+Epoch: 77 | Loss: 0.5645
+Epoch: 78 | Loss: 0.5645
+Epoch: 79 | Loss: 0.5645
+Epoch: 80 | Loss: 0.5645
+Epoch: 81 | Loss: 0.5645
+Epoch: 82 | Loss: 0.5645
+Epoch: 83 | Loss: 0.5645
+Epoch: 84 | Loss: 0.5645
+Epoch: 85 | Loss: 0.5645
+Epoch: 86 | Loss: 0.5645
+Epoch: 87 | Loss: 0.5645
+Epoch: 88 | Loss: 0.5645
+Epoch: 89 | Loss: 0.5645
+Epoch: 90 | Loss: 0.5645
+Epoch: 91 | Loss: 0.5645
+Epoch: 92 | Loss: 0.5645
+Epoch: 93 | Loss: 0.5645
+Epoch: 94 | Loss: 0.5645
+Epoch: 95 | Loss: 0.5645
+Epoch: 96 | Loss: 0.5645
+Epoch: 97 | Loss: 0.5645
+Epoch: 98 | Loss: 0.5645
+Epoch: 99 | Loss: 0.5645
+Epoch: 100 | Loss: 0.5645
+Epoch: 101 | Loss: 0.5645
+Epoch: 102 | Loss: 0.5645
+Epoch: 103 | Loss: 0.5645
+Epoch: 104 | Loss: 0.5645
+Epoch: 105 | Loss: 0.5645
+Epoch: 106 | Loss: 0.5645
+Epoch: 107 | Loss: 0.5645
+Epoch: 108 | Loss: 0.5645
+Epoch: 109 | Loss: 0.5645
+Epoch: 110 | Loss: 0.5645
+Epoch: 111 | Loss: 0.5645
+Epoch: 112 | Loss: 0.5645
+Epoch: 113 | Loss: 0.5645
+Epoch: 114 | Loss: 0.5645
+Epoch: 115 | Loss: 0.5645
+Epoch: 116 | Loss: 0.5645
+Epoch: 117 | Loss: 0.5645
+Epoch: 118 | Loss: 0.5645
+Epoch: 119 | Loss: 0.5645
+Epoch: 120 | Loss: 0.5645
+Epoch: 121 | Loss: 0.5645
+Epoch: 122 | Loss: 0.5645
+Epoch: 123 | Loss: 0.5645
+Epoch: 124 | Loss: 0.5645
+Epoch: 125 | Loss: 0.5645
+Epoch: 126 | Loss: 0.5645
+Epoch: 127 | Loss: 0.5645
+Epoch: 128 | Loss: 0.5645
+Epoch: 129 | Loss: 0.5645
+Epoch: 130 | Loss: 0.5645
+Epoch: 131 | Loss: 0.5645
+Epoch: 132 | Loss: 0.5645
+Epoch: 133 | Loss: 0.5645
+Epoch: 134 | Loss: 0.5645
+Epoch: 135 | Loss: 0.5645
+Epoch: 136 | Loss: 0.5645
+Epoch: 137 | Loss: 0.5645
+Epoch: 138 | Loss: 0.5645
+Epoch: 139 | Loss: 0.5645
+Epoch: 140 | Loss: 0.5645
+Epoch: 141 | Loss: 0.5645
+Epoch: 142 | Loss: 0.5645
+Epoch: 143 | Loss: 0.5645
+Epoch: 144 | Loss: 0.5645
+Epoch: 145 | Loss: 0.5645
+Epoch: 146 | Loss: 0.5645
+Epoch: 147 | Loss: 0.5645
+Epoch: 148 | Loss: 0.5645
+Epoch: 149 | Loss: 0.5645
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Testing-the-Model">Testing the Model<a class="anchor-link" href="#Testing-the-Model"> </a></h2><p>After training the model we have the ability to test the model predictive capability by passing it an input. Below is a simple example of how you could achieve this with our model. The result we obtained aligns with the results obtained in this <a href="https://github.com/lmoroney/dlaicourse/blob/master/Course%201%20-%20Part%202%20-%20Lesson%202%20-%20Notebook.ipynb">notebook</a>, which inspired this entire tutorial.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## test the model</span>
+<span class="n">sample</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="mf">10.0</span><span class="p">],</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float</span><span class="p">)</span>
+<span class="n">predicted</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">predicted</span><span class="o">.</span><span class="n">detach</span><span class="p">()</span><span class="o">.</span><span class="n">item</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>17.096769332885742
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Final-Words">Final Words<a class="anchor-link" href="#Final-Words"> </a></h2><p>Congratulations! In this tutorial you learned how to train a simple neural network using PyTorch. You also learned about the basic components that make up a neural network model such as the linear transformation layer, optimizer, and loss function. We then trained the model and tested its predictive capabilities. You are well on your way to become more knowledgeable about deep learning and PyTorch. I have provided a bunch of references below if you are interested in practising and learning more.</p>
+<p><em>I would like to thank Laurence Moroney for his excellent <a href="https://github.com/lmoroney/dlaicourse/blob/master/Course%201%20-%20Part%202%20-%20Lesson%202%20-%20Notebook.ipynb">tutorial</a> which I used as an inspiration for this tutorial.</em></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Exercises">Exercises<a class="anchor-link" href="#Exercises"> </a></h2><ul>
+<li>Add more examples in the input and output tensors. In addition, try to change the dimensions of the data, say by adding an extra value in each array. What needs to be changed to successfully train the network with the new data?</li>
+<li>The model converged really fast, which means it learned the relationship between x and y values after a couple of iterations. Do you think it makes sense to continue training? How would you automate the process of stopping the training after the model loss doesn't subtantially change?</li>
+<li>In our example, we used a single hidden layer. Try to take a look at the PyTorch documentation to figure out what you need to do to get a model with more layers. What happens if you add more hidden layers?</li>
+<li>We did not discuss the learning rate (<code>lr-0.001</code>) and the optimizer in great detail. Check out the <a href="https://pytorch.org/docs/stable/optim.html">PyTorch documentation</a> to learn more about what other optimizers you can use.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References"> </a></h2><ul>
+<li><a href="https://github.com/lmoroney/dlaicourse/blob/master/Course%201%20-%20Part%202%20-%20Lesson%202%20-%20Notebook.ipynb">The Hello World of Deep Learning with Neural Networks</a></li>
+<li><a href="https://medium.com/dair-ai/a-simple-neural-network-from-scratch-with-pytorch-and-google-colab-c7f3830618e0?source=collection_category---4------1-----------------------">A Simple Neural Network from Scratch with PyTorch and Google Colab</a></li>
+<li><a href="https://pytorch.org/docs/stable/nn.html">PyTorch Official Docs</a></li>
+<li><a href="https://medium.com/dair-ai/pytorch-1-2-quickstart-with-google-colab-6690a30c38d">PyTorch 1.2 Quickstart with Google Colab</a></li>
+<li><a href="https://medium.com/dair-ai/pytorch-1-2-introduction-guide-f6fa9bb7597c">A Gentle Intoduction to PyTorch</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="dair-ai/notebooks"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/notebooks/deep%20learning/beginner/neural%20network/2020/03/18/pytorch_hello_world.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/notebooks/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/notebooks/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/notebooks/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Sharing data science notebooks made easy.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/dair-ai" title="dair-ai"><svg class="svg-icon grey"><use xlink:href="/notebooks/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/dair_ai" title="dair_ai"><svg class="svg-icon grey"><use xlink:href="/notebooks/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
