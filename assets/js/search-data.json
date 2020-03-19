@@ -116,7 +116,7 @@
   
       ,"page6": {
           "title": "Submit Notebook",
-          "content": "Follow this &lt;a href”https://github.com/dair-ai/notebooks/tree/master/_notebooks#notebooks-by-dairai”&gt;guide&lt;/a&gt; before you upload your notebooks directly to our GitHub repo. . fastpages takes care of everything else and automatically publishes your notebook to this website. .",
+          "content": "Follow this guide before you upload your notebooks directly to our GitHub repo. . fastpages takes care of everything else and automatically publishes your notebook to this website. .",
           "url": "https://dair-ai.github.io/notebooks/submit/",
           "relUrl": "/submit/",
           "date": ""
