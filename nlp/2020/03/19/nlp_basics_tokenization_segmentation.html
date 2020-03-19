@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Fundamentals of NLP - Chapter 1 - Tokenization, Lemmatization, Stemming, and Sentence Segmentation | Notebooks by dair.ai</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Fundamentals of NLP - Chapter 1 - Tokenization, Lemmatization, Stemming, and Sentence Segmentation" />
+<meta name="author" content="Elvis Saravia" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The first chapter of the fundamental of NLP series." />
+<meta property="og:description" content="The first chapter of the fundamental of NLP series." />
+<link rel="canonical" href="https://dair-ai.github.io/notebooks/nlp/2020/03/19/nlp_basics_tokenization_segmentation.html" />
+<meta property="og:url" content="https://dair-ai.github.io/notebooks/nlp/2020/03/19/nlp_basics_tokenization_segmentation.html" />
+<meta property="og:site_name" content="Notebooks by dair.ai" />
+<meta property="og:image" content="https://dair-ai.github.io/notebooks/images/fon-1.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-19T00:00:00-05:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Elvis Saravia"},"description":"The first chapter of the fundamental of NLP series.","headline":"Fundamentals of NLP - Chapter 1 - Tokenization, Lemmatization, Stemming, and Sentence Segmentation","dateModified":"2020-03-19T00:00:00-05:00","datePublished":"2020-03-19T00:00:00-05:00","@type":"BlogPosting","image":"https://dair-ai.github.io/notebooks/images/fon-1.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dair-ai.github.io/notebooks/nlp/2020/03/19/nlp_basics_tokenization_segmentation.html"},"url":"https://dair-ai.github.io/notebooks/nlp/2020/03/19/nlp_basics_tokenization_segmentation.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/notebooks/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://dair-ai.github.io/notebooks/feed.xml" title="Notebooks by dair.ai" /><link rel="shortcut icon" type="image/x-icon" href="/notebooks/images/favicon.png">
+<!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Fundamentals of NLP - Chapter 1 - Tokenization, Lemmatization, Stemming, and Sentence Segmentation | Notebooks by dair.ai</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Fundamentals of NLP - Chapter 1 - Tokenization, Lemmatization, Stemming, and Sentence Segmentation" />
+<meta name="author" content="Elvis Saravia" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="The first chapter of the fundamental of NLP series." />
+<meta property="og:description" content="The first chapter of the fundamental of NLP series." />
+<link rel="canonical" href="https://dair-ai.github.io/notebooks/nlp/2020/03/19/nlp_basics_tokenization_segmentation.html" />
+<meta property="og:url" content="https://dair-ai.github.io/notebooks/nlp/2020/03/19/nlp_basics_tokenization_segmentation.html" />
+<meta property="og:site_name" content="Notebooks by dair.ai" />
+<meta property="og:image" content="https://dair-ai.github.io/notebooks/images/fon-1.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-03-19T00:00:00-05:00" />
+<script type="application/ld+json">
+{"author":{"@type":"Person","name":"Elvis Saravia"},"description":"The first chapter of the fundamental of NLP series.","headline":"Fundamentals of NLP - Chapter 1 - Tokenization, Lemmatization, Stemming, and Sentence Segmentation","dateModified":"2020-03-19T00:00:00-05:00","datePublished":"2020-03-19T00:00:00-05:00","@type":"BlogPosting","image":"https://dair-ai.github.io/notebooks/images/fon-1.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://dair-ai.github.io/notebooks/nlp/2020/03/19/nlp_basics_tokenization_segmentation.html"},"url":"https://dair-ai.github.io/notebooks/nlp/2020/03/19/nlp_basics_tokenization_segmentation.html","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://dair-ai.github.io/notebooks/feed.xml" title="Notebooks by dair.ai" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/notebooks/">Notebooks by dair.ai</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/notebooks/about/">About</a><a class="page-link" href="/notebooks/search/">Search</a><a class="page-link" href="/notebooks/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Fundamentals of NLP - Chapter 1 - Tokenization, Lemmatization, Stemming, and Sentence Segmentation</h1><p class="page-description">The first chapter of the fundamental of NLP series.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-03-19T00:00:00-05:00" itemprop="datePublished">
+        Mar 19, 2020
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Elvis Saravia</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      14 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/notebooks/categories/#nlp">nlp</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/dair-ai/notebooks/tree/master/_notebooks/2020-03-19-nlp_basics_tokenization_segmentation.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/notebooks/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/dair-ai/notebooks/master?filepath=_notebooks%2F2020-03-19-nlp_basics_tokenization_segmentation.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/notebooks/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/dair-ai/notebooks/blob/master/_notebooks/2020-03-19-nlp_basics_tokenization_segmentation.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/notebooks/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2020-03-19-nlp_basics_tokenization_segmentation.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction"> </a></h2><p><strong>Author:</strong> Elvis Saravia ( <a href="https://twitter.com/omarsar0">Twitter</a> | <a href="https://www.linkedin.com/in/omarsar/">LinkedIn</a>)</p>
+<p><strong>The full project will be maintained <a href="https://github.com/dair-ai/nlp_fundamentals">here</a>.</strong></p>
+<hr />
+<p><img src="https://drive.google.com/uc?export=view&amp;id=1cCumIkBf0sax3DGjLw9-eVxvSvn01jnQ" alt="alt text" /></p>
+<p>Natural language processing (NLP) has made substantial advances in the past few years due to the success of <a href="https://nlpoverview.com/">modern techniques</a> that are based on <a href="https://en.wikipedia.org/wiki/Deep_learning">deep learning</a>. With the rise of the popularity of NLP and the availability of different forms of large-scale data, it is now even more imperative to understand the inner workings of NLP techniques and concepts, from first principles, as they find their way into real-world usage and applications that affect society at large. Building intuitions and having a solid grasp of concepts are both important for coming up with innovative techniques, improving research, and building safe, human-centered AI and NLP technologies.</p>
+<p>In this first chapter, which is part of a series called <strong>Fundamentals of NLP</strong>, we will learn about some of the most important <strong>basic concepts</strong> that power NLP techniques used for research and building real-world applications. Some of these techniques include <em>lemmatization</em>, <em>stemming</em>, <em>tokenization</em>, and <em>sentence segmentation</em>. These are all important techniques to train efficient and effective NLP models. Along the way, we will also cover best practices and common mistakes to avoid when training and building NLP models. We also provide some exercises for you to keep practicing and exploring some ideas.</p>
+<p>In every chapter, we will introduce the theoretical aspect and motivation of each concept covered. Then we will obtain hands-on experience by using bootstrap methods, industry-standard tools, and other open-source libraries to implement the different techniques. Along the way, we will also cover best practices, share important references, point out common mistakes to avoid when training and building NLP models, and discuss what lies ahead.</p>
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tokenization">Tokenization<a class="anchor-link" href="#Tokenization"> </a></h2><p><img src="https://drive.google.com/uc?export=view&amp;id=1h0ZNzohff1nUWMerrW50eDxY99ArRJTK" alt="alt text" /></p>
+<p>With any typical NLP task, one of the first steps is to tokenize your pieces of text into its individual words/tokens (process demonstrated in the figure above), the result of which is used to create so-called vocabularies that will be used in the langauge model you plan to build. This is actually one of the techniques that we will use the most throughout this series but here we stick to the basics.</p>
+<p>Below I am showing you an example of a simple tokenizer without any following any standards. All it does is extract tokens based on a white space seperator.</p>
+<p>Try to running the following code blocks.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## required libraries that need to be installed</span>
+<span class="o">%%capture</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">spacy</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">spacy</span><span class="o">-</span><span class="n">lookups</span><span class="o">-</span><span class="n">data</span>
+<span class="err">!</span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">spacy</span> <span class="n">download</span> <span class="n">en_core_web_sm</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## tokenizing a piecen of text</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="s2">&quot;I love coding and writing&quot;</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">w</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">doc</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Token &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;: &quot;</span> <span class="o">+</span> <span class="n">w</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Token 0: I
+Token 1: love
+Token 2: coding
+Token 3: and
+Token 4: writing
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>All the code does is separate the sentence into individual tokens. The above simple block of code works well on the text I have provided. But typically, text is a lot noisier and complex than the example I used. For instance, if I used the word "so-called" is that one word or two words? For such scenarios, you may need more advanced approaches for tokenization. You can consider stripping away the "-" and splitting into two tokens or just combining into one token but this all depends on the problem and domain you are working on.</p>
+<p>Another problem with our simple algorithm is that it cannot deal with extra whitespaces in the text. In addition, how do we deal with cities like "New York" and "San Francisco"?</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+<p><strong>Exercise 1</strong>: Copy the code from above and add extra whitespaces to the string value assigned to the <code>doc</code> variable and identify the issue with the code. Then try to fix the issue. Hint: Use <code>text.strip()</code> to fix the problem.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">###  ENTER CODE HERE</span>
+
+<span class="c1">### </span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Tokenization can also come in different forms. For instance, more recently a lot of state-of-the-art NLP models such as <a href="https://arxiv.org/pdf/1810.04805.pdf">BERT</a> make use of <code>subword</code> tokens in which frequent combinations of characters also form part of the vocabulary. This helps to deal with the so-called out of vocabulary (OOV) problem. We will discuss this in upcoming chapters, but if you are interested in reading more about this now, check this <a href="https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/37842.pdf">paper</a>.</p>
+<p>To demonstrate how you can achieve more reliable tokenization, we are going to use <a href="https://spacy.io/">spaCy</a>, which is an impressive and robust Python library for natural language processing. In particular, we are going to use the built-in tokenizer found <a href="https://spacy.io/usage/linguistic-features#sbd-custom">here</a>.</p>
+<p>Run the code block below.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## import the libraries</span>
+<span class="kn">import</span> <span class="nn">spacy</span>
+<span class="c1">## load the language model</span>
+<span class="n">nlp</span> <span class="o">=</span> <span class="n">spacy</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;en_core_web_sm&quot;</span><span class="p">)</span>
+
+<span class="c1">## tokenization</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;This is the so-called lemmatization&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>This
+is
+the
+so
+-
+called
+lemmatization
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>All the code does is tokenize the text based on a pre-built language model.</p>
+<p>Try putting different running text into the <code>nlp()</code> part of the code above. The tokenizer is quiet robust and it includes a series of built-in rules that deal with exceptions and special cases such as those tokens that contain puctuations like "`" and ".", "-", etc. You can even add your own rules, find out how <a href="https://spacy.io/usage/linguistic-features#special-cases">here</a>.</p>
+<p>In a later chapter of the series, we will do a deep dive on tokenization and the different tools that exist out there that can simplify and speed up the process of tokenization to build vocabularies. Some of the tools we will explore are the <a href="https://www.tensorflow.org/api_docs/python/tf/keras/preprocessing/text/Tokenizer">Keras Tokenizer API</a> and <a href="https://github.com/huggingface/tokenizers">Hugging Face Tokenizer</a>.</p>
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Lemmatization">Lemmatization<a class="anchor-link" href="#Lemmatization"> </a></h2><p><img src="https://drive.google.com/uc?export=view&amp;id=1_-wxBOU_JebjdG1sxoobKYRCtX3dVF0L" alt="alt text" /></p>
+<p><a href="https://en.wikipedia.org/wiki/Lemmatisation">Lemmatization</a> is the process where we take individual tokens from a sentence and we try to reduce them to their <em>base</em> form. The process that makes this possible is having a vocabulary and performing morphological analysis to remove inflectional endings. The output of the lemmatization process (as shown in the figure above) is the <em>lemma</em> or the base form of the word. For instance, a lemmatization process reduces the inflections, "am", "are", and "is", to the base form, "be". Take a look at the figure above for a full example and try to understand what it's doing.</p>
+<p>Lemmatization is helpful for normalizing text for text classification tasks or search engines, and a variety of other NLP tasks such as <a href="https://en.wikipedia.org/wiki/Sentiment_analysis">sentiment classification</a>. It is particularly important when dealing with complex languages like Arabic and Spanish.</p>
+<p>To show how you can achieve lemmatization and how it works, we are going to use <a href="https://spacy.io/">spaCy</a> again. Using the spaCy <a href="https://spacy.io/api/lemmatizer#_title">Lemmatizer</a> class, we are going to convert a few words into their lemmas.</p>
+<p>Below I show an example of how to lemmatize a sentence using spaCy. Try to run the block of code below and inspect the results.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## import the libraries</span>
+<span class="kn">from</span> <span class="nn">spacy.lemmatizer</span> <span class="kn">import</span> <span class="n">Lemmatizer</span>
+<span class="kn">from</span> <span class="nn">spacy.lookups</span> <span class="kn">import</span> <span class="n">Lookups</span>
+
+<span class="c1">## lemmatization</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="sa">u</span><span class="s1">&#39;I love coding and writing&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">word</span> <span class="ow">in</span> <span class="n">doc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">word</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;=&gt;&quot;</span><span class="p">,</span> <span class="n">word</span><span class="o">.</span><span class="n">lemma_</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>I =&gt; -PRON-
+love =&gt; love
+coding =&gt; code
+and =&gt; and
+writing =&gt; writing
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The results above look as expected. The only lemma that looks off is the <code>-PRON-</code> returned for the "I" token. According to the spaCy documentation, "<em>This is in fact expected behavior and not a bug. Unlike verbs and common nouns, there’s no clear base form of a personal pronoun. Should the lemma of “me” be “I”, or should we normalize person as well, giving “it” — or maybe “he”? spaCy’s solution is to introduce a novel symbol, -PRON-, which is used as the lemma for all personal pronouns.</em>"</p>
+<p>Check out more about this in the <a href="https://spacy.io/api/annotation#lemmatization">spaCy documentation</a>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Exercise 2:</strong> Try the code above with different sentences and see if you get any unexpected results. Also, try adding punctuations and extra whitespaces which are more common in natural language. What happens?</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### ENTER CODE HERE</span>
+
+<span class="c1">###</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can also create our own custom lemmatizer as shown below (<em>code adopted directly from the spaCy website</em>):</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## lookup tables</span>
+<span class="n">lookups</span> <span class="o">=</span> <span class="n">Lookups</span><span class="p">()</span>
+<span class="n">lookups</span><span class="o">.</span><span class="n">add_table</span><span class="p">(</span><span class="s2">&quot;lemma_rules&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;noun&quot;</span><span class="p">:</span> <span class="p">[[</span><span class="s2">&quot;s&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">]]})</span>
+<span class="n">lemmatizer</span> <span class="o">=</span> <span class="n">Lemmatizer</span><span class="p">(</span><span class="n">lookups</span><span class="p">)</span>
+
+<span class="n">words_to_lemmatize</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;cats&quot;</span><span class="p">,</span> <span class="s2">&quot;brings&quot;</span><span class="p">,</span> <span class="s2">&quot;sings&quot;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">w</span> <span class="ow">in</span> <span class="n">words_to_lemmatize</span><span class="p">:</span>
+    <span class="n">lemma</span> <span class="o">=</span> <span class="n">lemmatizer</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="s2">&quot;NOUN&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">lemma</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;cat&#39;]
+[&#39;bring&#39;]
+[&#39;sing&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In the example code above, we added one <em>lemma rule</em>, which aims to identify plural nouns and remove the plurality, i.e. remove the "s". There are different types of rules you can add here. I encourage you to head over to the <a href="https://spacy.io/api/lemmatizer">spaCy documentation</a> to learn a bit more.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Stemming">Stemming<a class="anchor-link" href="#Stemming"> </a></h2><p><img src="https://drive.google.com/uc?export=view&amp;id=1XcK3OzdPd2ywO8Y4G6vfjuIFthPce3FH" alt="alt text" /></p>
+<p>Stemming is just a simpler version of lemmatization where we are interested in stripping the <em>suffix</em> at the end of the word. When stemming we are interesting in reducing the <em>inflected</em> or <em>derived</em> word to it's base form. Take a look at the figure above to get some intuition about the process.</p>
+<p>Both the stemming and the lemmatization processes involve <a href="https://en.wikipedia.org/wiki/Morphology_(linguistics"><em>morphological analysis</em></a>) where the stems and affixes (called the <em>morphemes</em>) are extracted and used to reduce inflections to their base form. For instance, the word <em>cats</em> has two morphemes, <em>cat</em> and <em>s</em>, the <em>cat</em> being the stem and the <em>s</em> being the affix representing plurality.</p>
+<p>spaCy doesn't support stemming so for this part we are going to use <a href="https://www.nltk.org/">NLTK</a>, which is another fantastic Python NLP library.</p>
+<p>The simple example below demonstrates how you can stem words in a piece of text. Go ahead and run the code to see what happens.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">nltk.stem.snowball</span> <span class="kn">import</span> <span class="n">SnowballStemmer</span>
+
+<span class="n">stemmer</span> <span class="o">=</span> <span class="n">SnowballStemmer</span><span class="p">(</span><span class="n">language</span><span class="o">=</span><span class="s1">&#39;english&#39;</span><span class="p">)</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="s1">&#39;I prefer not to argue&#39;</span>
+<span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="s1">&#39;=&gt;&#39;</span> <span class="p">,</span> <span class="n">stemmer</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>I =&gt; i
+prefer =&gt; prefer
+not =&gt; not
+to =&gt; to
+ =&gt; 
+argue =&gt; argu
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Notice how the stemmed version of the word "argue" is "argu". That's because we can have derived words like "argument", "arguing", and "argued".</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Exercise 3:</strong> Try to use different sentences in the code above and observe the effect of the stemmer. By the way, there are other stemmers such as the Porter stemmer in the NLTK library. Each stemmer behaves differently so the output may vary. Feel free to try the <a href="https://www.nltk.org/howto/stem.html">Porter stemmer</a> from the NLTK library and inspect the output of the different stemmers.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">###  ENTER CODE HERE</span>
+
+<span class="c1">###</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Sentence-Segmentation">Sentence Segmentation<a class="anchor-link" href="#Sentence-Segmentation"> </a></h2><p><img src="https://drive.google.com/uc?export=view&amp;id=1aeHpGNWdnA_VdP0VAu7sO1OGW2eusgHH" alt="alt text" /></p>
+<p>When dealing with text, it is always common that we need to break up text into its individual sentences. That is what is known as sentence segmentation: the process of obtaining the individual sentences from a text corpus. The resulting segments can then be analyzed individually with the techniques that we previously learned.</p>
+<p>In the spaCy library, we have the choice to use a built-in sentence segmenter (trained on statistical models) or build your own rule-based method. In fact, we will cover a few examples to demonstrate the difficultiness of this problem.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Below I created a naive implementation of a sentence segmentation algorithm without using any kind of special library. You can see that my code increases with complexity (bugs included) as I start to consider more rules. This sort of boostrapped or rule-based approach is sometimes your only option depending on the language you are working with or the availability of linguistic resources.</p>
+<p>Run the code below to apply a simple algorithm for sentence segmentation.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## using a simple rule-based segmenter with native python code</span>
+<span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;I love coding and programming. I also love sleeping!&quot;</span>
+
+<span class="n">current_position</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">cursor</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sentences</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">text</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;.&quot;</span> <span class="ow">or</span> <span class="n">c</span> <span class="o">==</span> <span class="s2">&quot;!&quot;</span><span class="p">:</span>
+        <span class="n">sentences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">text</span><span class="p">[</span><span class="n">current_position</span><span class="p">:</span><span class="n">cursor</span><span class="o">+</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">current_position</span> <span class="o">=</span> <span class="n">cursor</span> <span class="o">+</span> <span class="mi">2</span>
+    <span class="n">cursor</span><span class="o">+=</span><span class="mi">1</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">sentences</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[&#39;I love coding and programming.&#39;, &#39;I also love sleeping!&#39;]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Our sentence segmenter only segments sentences when it meets a sentence boundary which in this case is either a "." or a "!". It's not the cleanest of code but it shows how difficult the task can get as we are presented with richer text that include more diverse special characters. One problem with my code is that I am not able to differentiate between abbreviations like Dr. and numbers like 0.4. You may be able to create your own complex regular expression (we will get into this in the second chapter) to deal with these special cases but it still requires a lot of work and debugging. Luckily for us, there are libraries like spaCy and NLTK which help with this sort of preprocessing tasks.</p>
+<p>Let's try the sentence segmentation provided by spaCy. Run the code below and inspect the results.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">doc</span> <span class="o">=</span> <span class="n">nlp</span><span class="p">(</span><span class="s2">&quot;I love coding and programming. I also love sleeping!&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sent</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">sents</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">sent</span><span class="o">.</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>I love coding and programming.
+I also love sleeping!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Here is a <a href="https://spacy.io/usage/linguistic-features#sbd-custom">link</a> showing how you can create your own rule-based strategy for sentence segmentation using spaCy. This is particulary useful if you are working with domain-specific text which is full with noisy information and is not as standardized as text found on a factual Wiki page or news website.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Exercise 4:</strong> For practise, try to create your own sentence segmentation algorithm using spaCy (try this <a href="https://spacy.io/usage/linguistic-features#sbd-custom">link</a> for help and ideas). At this point, I am encouraging you to look at documentation which is a huge part of learning in-depth about all the concepts we will cover in this series. Research is a huge part of the learning process.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">###  ENTER CODE HERE</span>
+
+<span class="c1">###</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr />
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="How-to-use-with-Machine-Learning?">How to use with Machine Learning?<a class="anchor-link" href="#How-to-use-with-Machine-Learning?"> </a></h2><p>When you are working with textual information, it is imperative to clean your data so as to be able to train more accurate machine learning (ML) models.</p>
+<p>One of the reasons why transformations like lemmatization and stemming are useful is for normalizing the text before you feed the output to an ML algorithm. For instance, if you are building a sentiment analysis model how can you tell the model that "smiling" and "smile" refer to the same concept? You may require stemming if you are using <a href="https://en.wikipedia.org/wiki/Tf%E2%80%93idf">TF-IDF</a> features combined with a machine learning algorithm such as <a href="https://en.wikipedia.org/wiki/Naive_Bayes_classifier">Naive Bayes classifier</a>. As you may suspect already, this also requires a really good tokenizer to come up with the features, especially when work on noisy pieces of text that could be generated from users in a social media site.</p>
+<p>With a wide variety of NLP tasks, one of the first big steps in the NLP pipeline is to create a vocabulary that will eventually be used to determine the inputs for the model representing the features. In modern NLP techniques such as pretrained language models, you need to process a text corpus that require proper and more sophisticated sentence segmentation and tokenization as we discussed before. We will talk more about these methods in due time. For now, the basics presented here are a good start into the world of practical NLP. Spend some time reading up on all the concepts mentioned here and take notes. I will guide through the series on what are the important parts and provide you with relevant links but you can also conduct your own additional research on the side and even improve this notebook.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Final-Words-and-What's-Next?">Final Words and What's Next?<a class="anchor-link" href="#Final-Words-and-What's-Next?"> </a></h2><p>In this chapter we learned some fundamental concepts of NLP such as lemmatization, stemming, sentence segmentations, and tokenization. In the next chapter we will cover topics such as <strong>word normalization</strong>, <strong>regular expressions</strong>, <strong>part of speech</strong> and <strong>edit distance</strong>, all very important topics when working with information retrieval and NLP systems.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References"> </a></h2><ul>
+<li><a href="https://spacy.io/usage/models#languages">Model Languages from spaCyu</a></li>
+<li><a href="https://web.stanford.edu/~jurafsky/slp3/">Speech and Language Processing - Jurafsky and Martin</a></li>
+<li><a href="https://stackabuse.com/python-for-nlp-tokenization-stemming-and-lemmatization-with-spacy-library/">Python for NLP: Tokenization, Stemming, and Lemmatization with SpaCy Library</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Stemming">Stemming</a></li>
+<li><a href="https://spacy.io/api/lemmatizer#init">Lemmatizer</a></li>
+<li><a href="https://nlp.stanford.edu/IR-book/html/htmledition/stemming-and-lemmatization-1.html">Stanford IR Book</a></li>
+<li><a href="https://spacy.io/usage/linguistic-features#sbd-custom">Linguistic Features by spaCy</a></li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="dair-ai/notebooks"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/notebooks/nlp/2020/03/19/nlp_basics_tokenization_segmentation.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/notebooks/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/notebooks/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/notebooks/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Sharing data science notebooks made easy.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/dair-ai" title="dair-ai"><svg class="svg-icon grey"><use xlink:href="/notebooks/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/dair_ai" title="dair_ai"><svg class="svg-icon grey"><use xlink:href="/notebooks/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
