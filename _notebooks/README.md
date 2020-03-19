@@ -7,7 +7,7 @@ Sharing is easy! Just upload your notebooks to the `_notebooks` folder and it wi
 ### How to Contribute
 1) Have your Jupyter notebook ready for publication. Make sure you check out this [guideline](https://fastpages.fast.ai/jupyter/2020/02/20/test.html) to leverage all the amazing features of fastpages. In order to properly format the notebook when rendered as a web page, you need to include a markdown cell at the beginning of the notebook as in the example below: 
 
-![img txt](images/front-matter.png)
+![img txt](../images/front-matter.png)
 
 2) Then ask for an invite to be able to commit to this repo. Email me directly to ellfae@gmail.com or [DM on Twitter](https://twitter.com/omarsar0).  
 3) You can then upload your notebook directly to the [`_notebooks`](https://github.com/dair-ai/notebooks/tree/master/_notebooks) folder. Ensure that the notebook follows the following naming convention: `YYYY-MM-DD-Name-of-your-notebook.ipynb`.
