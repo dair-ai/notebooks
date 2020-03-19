@@ -8,7 +8,7 @@
 # Notebooks by dair.ai
 This is a place to host and share data science notebooks that range from beginner tutorials for deep learing to complete walkthrough of complex topics such as Transformers for NLP and object detection for CV. 
 
-Sharing is easy! Just upload your notebooks to the `_notebooks` folder and they will be featured on our [website](https://dair.ai/notebooks/). The notebooks will be shared in our weekly newsletter which is read by thousands of avid learners.
+Sharing is easy! Just upload your notebooks to the `_notebooks` folder and they will be featured on our [website](https://dair.ai/notebooks/). The notebooks will also be featured in our weekly newsletter which is read by thousands of avid learners.
 
 https://dair.ai/notebooks/
 
