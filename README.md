@@ -10,6 +10,7 @@ This is a place to host and share data science notebooks that range from beginne
 
 Sharing is easy! Just upload your notebooks to the `_notebooks` folder and they will be featured on our [website](https://dair.ai/notebooks/). The notebooks will be shared in our weekly newsletter which is read by thousands of avid learners.
 
+https://dair.ai/notebooks/
 
 ### How to Contribute
 1) Have your Jupyter notebook ready for publication. Make sure you check out this [guideline](https://fastpages.fast.ai/jupyter/2020/02/20/test.html) to leverage all the amazing features of fastpages. In order to properly format the notebook when rendered as a web page, you need to include a markdown cell at the beginning of the notebook as shown in the example below: 
