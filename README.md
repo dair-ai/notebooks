@@ -13,6 +13,9 @@ Sharing is easy! Just upload your notebooks to the `_notebooks` folder and they 
 https://dair.ai/notebooks/
 
 ### How to Contribute
+
+[![](https://sourcerer.io/fame/omarsar/omarsar/notebooks/images/0)](https://sourcerer.io/fame/omarsar/omarsar/notebooks/links/0)[![](https://sourcerer.io/fame/omarsar/omarsar/notebooks/images/1)](https://sourcerer.io/fame/omarsar/omarsar/notebooks/links/1)[![](https://sourcerer.io/fame/omarsar/omarsar/notebooks/images/2)](https://sourcerer.io/fame/omarsar/omarsar/notebooks/links/2)[![](https://sourcerer.io/fame/omarsar/omarsar/notebooks/images/3)](https://sourcerer.io/fame/omarsar/omarsar/notebooks/links/3)[![](https://sourcerer.io/fame/omarsar/omarsar/notebooks/images/4)](https://sourcerer.io/fame/omarsar/omarsar/notebooks/links/4)[![](https://sourcerer.io/fame/omarsar/omarsar/notebooks/images/5)](https://sourcerer.io/fame/omarsar/omarsar/notebooks/links/5)[![](https://sourcerer.io/fame/omarsar/omarsar/notebooks/images/6)](https://sourcerer.io/fame/omarsar/omarsar/notebooks/links/6)[![](https://sourcerer.io/fame/omarsar/omarsar/notebooks/images/7)](https://sourcerer.io/fame/omarsar/omarsar/notebooks/links/7)
+
 1) Have your Jupyter notebook ready for publication. Make sure you check out this [guideline](https://fastpages.fast.ai/jupyter/2020/02/20/test.html) to leverage all the amazing features of fastpages. In order to properly format the notebook when rendered as a web page, you need to include a markdown cell at the beginning of the notebook as shown in the example below: 
 
 ![img txt](images/front-matter.png)
