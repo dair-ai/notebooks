@@ -24,18 +24,6 @@ https://dair.ai/notebooks/
 
 3) Notebooks will then be reviewed and published. This will also be followed by a special feature in the upcoming [NLP Newsletter](https://github.com/dair-ai/nlp_newsletter) where educational resources are shared with thousands of avid readers. 
 
-If this repository helped you in your research, please consider citing us:
-
-```
-@misc{saravia2020dair,
-  title={dair.ai: Democratizing Artificial Intelligence Research, Education, and Technologies},
-  author={Saravia, Elvis},
-  journal={https://github.com/dair-ai},
-  number={1},
-  year={2020}
-}
-```
-
 ---
 ### Credits
 _powered by [fastpages](https://github.com/fastai/fastpages)_
